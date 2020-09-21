@@ -1,0 +1,51 @@
+package com.bolton.project.smartlib.service.impl;
+
+import com.bolton.project.smartlib.dto.UserDTO;
+import com.bolton.project.smartlib.entity.User;
+import com.bolton.project.smartlib.repository.LibraryRepository;
+import com.bolton.project.smartlib.repository.UserRepository;
+import com.bolton.project.smartlib.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class UserServiceImpl implements UserService {
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private LibraryRepository libraryRepository;
+
+    @Override
+    public boolean CreateUser(UserDTO userDTO) {
+
+        User user = new User();
+        user.setUserid(userDTO.getUserid());
+        user.setUserfname(userDTO.getUserfname());
+        user.setUserlname(userDTO.getUserlname());
+        user.setUseraddress(userDTO.getUseraddress());
+        user.setUsermobile(userDTO.getUsermobile());
+        user.setUseractivestatus(userDTO.getUseractivestatus());
+
+        user.setLibrary(libraryRepository.getOne(Integer.valueOf(userDTO.getLibraryDTO().getLibid())));
+
+        userRepository.save(user);
+
+        return true;
+
+    }
+
+    @Override
+    public List<UserDTO> getAll(Pageable pageable) throws Exception {
+        return null;
+    }
+
+    @Override
+    public boolean deleteUser(String nic) {
+        return false;
+    }
+}
