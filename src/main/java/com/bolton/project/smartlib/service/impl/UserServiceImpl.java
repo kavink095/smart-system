@@ -8,10 +8,13 @@ import com.bolton.project.smartlib.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 public class UserServiceImpl implements UserService {
 
     @Autowired
@@ -21,6 +24,7 @@ public class UserServiceImpl implements UserService {
     private LibraryRepository libraryRepository;
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public boolean CreateUser(UserDTO userDTO) {
 
         User user = new User();
