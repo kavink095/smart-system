@@ -18,6 +18,14 @@ public class Library {
     @Column(name = "libcity")
     private String libcity;
 
+    @ManyToOne
+    @JoinColumn(name = "acid", nullable = false)
+    private Account account;
+
+    @ManyToOne
+    @JoinColumn(name = "rackid", nullable = false)
+    private Rack rack;
+
     @OneToMany(mappedBy = "library")
     private List<User> userList;
 
