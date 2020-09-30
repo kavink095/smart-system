@@ -86,12 +86,12 @@ public class UserDTO {
         this.useractivestatus = useractivestatus;
     }
 
-    public LibraryDTO getLibrary() {
+    public LibraryDTO getLibraryDTO() {
         return libraryDTO;
     }
 
-    public void setLibrary(LibraryDTO library) {
-        this.libraryDTO = library;
+    public void setLibraryDTO(LibraryDTO libraryDTO) {
+        this.libraryDTO = libraryDTO;
     }
 
     public List<UserBookDTO> getUserBookDTOList() {
@@ -112,7 +112,7 @@ public class UserDTO {
                 ", usermobile='" + usermobile + '\'' +
                 ", userEnterStatus='" + userEnterStatus + '\'' +
                 ", useractivestatus=" + useractivestatus +
-                ", library=" + libraryDTO +
+                ", libraryDTO=" + libraryDTO +
                 ", userBookDTOList=" + userBookDTOList +
                 '}';
     }

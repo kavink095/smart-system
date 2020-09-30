@@ -2,6 +2,7 @@ package com.bolton.project.smartlib.service.impl;
 
 import com.bolton.project.smartlib.dto.UserDTO;
 import com.bolton.project.smartlib.entity.User;
+import com.bolton.project.smartlib.repository.LibraryRepository;
 import com.bolton.project.smartlib.repository.UserRepository;
 import com.bolton.project.smartlib.service.UserService;
 import org.slf4j.Logger;
@@ -22,11 +23,14 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private LibraryRepository libraryRepository;
+
     @Override
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-    public int CreateUser(UserDTO userDTO) {
+    public boolean CreateUser(UserDTO userDTO) {
 
-
+        try {
             User user = new User();
 
             user.setUserid(userDTO.getUserid());
@@ -37,12 +41,15 @@ public class UserServiceImpl implements UserService {
             user.setUserEnterStatus(userDTO.getUserEnterStatus());
             user.setUseractivestatus(userDTO.getUseractivestatus());
 
+            user.setLibrary(libraryRepository.getOne(Integer.valueOf(userDTO.getLibraryDTO().getLibid())));
+
             userRepository.save(user);
 
-            return 1;
-
-
-
+        } catch (Exception e) {
+            logger.debug(e.getMessage(), e);
+            throw e;
+        }
+        return true;
     }
 
     @Override
