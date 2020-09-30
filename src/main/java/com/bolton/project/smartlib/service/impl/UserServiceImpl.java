@@ -2,8 +2,6 @@ package com.bolton.project.smartlib.service.impl;
 
 import com.bolton.project.smartlib.dto.UserDTO;
 import com.bolton.project.smartlib.entity.User;
-import com.bolton.project.smartlib.repository.AccountRepository;
-import com.bolton.project.smartlib.repository.LibraryRepository;
 import com.bolton.project.smartlib.repository.UserRepository;
 import com.bolton.project.smartlib.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +18,6 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
-
-    @Autowired
-    private AccountRepository accountRepository;
 
     @Override
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -45,13 +40,18 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> getAll(Pageable pageable) throws Exception {
-        return null;
+        try {
+            return userRepository.findAll(pageable).toList();
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
 
     @Override
     public boolean deleteUser(String nic) {
-        return false;
+        userRepository.deleteById(nic);
+        return true;
     }
 
     @Override
