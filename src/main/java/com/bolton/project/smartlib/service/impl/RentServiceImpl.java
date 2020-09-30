@@ -7,9 +7,12 @@ import com.bolton.project.smartlib.repository.RentRepository;
 import com.bolton.project.smartlib.repository.UserRepository;
 import com.bolton.project.smartlib.service.RentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -43,4 +46,15 @@ public class RentServiceImpl implements RentService {
 
         return true;
     }
+
+    @Override
+    public List<Rent> getAll(Pageable pageable) throws Exception {
+        try {
+            return rentRepository.findAll(pageable).toList();
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+
 }

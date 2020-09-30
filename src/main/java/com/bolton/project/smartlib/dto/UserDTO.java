@@ -12,12 +12,13 @@ public class UserDTO {
     private int useractivestatus;
 
     private LibraryDTO libraryDTO;
+
     private List<RentDTO> rentDTOList;
 
     public UserDTO() {
     }
 
-    public UserDTO(String userid, String userfname, String userlname, String useraddress, String usermobile, int useractivestatus, LibraryDTO libraryDTO) {
+    public UserDTO(String userid, String userfname, String userlname, String useraddress, String usermobile, int useractivestatus, LibraryDTO libraryDTO, List<RentDTO> rentDTOList) {
         this.userid = userid;
         this.userfname = userfname;
         this.userlname = userlname;
@@ -25,6 +26,7 @@ public class UserDTO {
         this.usermobile = usermobile;
         this.useractivestatus = useractivestatus;
         this.libraryDTO = libraryDTO;
+        this.rentDTOList = rentDTOList;
     }
 
     public String getUserid() {

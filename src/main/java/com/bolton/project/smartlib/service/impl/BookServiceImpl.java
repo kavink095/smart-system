@@ -5,6 +5,8 @@ import com.bolton.project.smartlib.entity.Book;
 import com.bolton.project.smartlib.repository.BookRepository;
 import com.bolton.project.smartlib.repository.RackRepository;
 import com.bolton.project.smartlib.service.BookService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -13,9 +15,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+
 @Service
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 public class BookServiceImpl implements BookService {
+    Logger logger = LoggerFactory.getLogger(BookServiceImpl.class);
 
     @Autowired
     private BookRepository bookRepository;
@@ -41,8 +45,13 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<BookDTO> getAll(Pageable pageable) throws Exception {
-        return null;
+    public List<Book> getAll(Pageable pageable) throws Exception {
+        try {
+            return bookRepository.findAll(pageable).toList();
+        } catch (Exception e) {
+            logger.debug(e.getMessage(), e);
+            throw e;
+        }
     }
 
     @Override
