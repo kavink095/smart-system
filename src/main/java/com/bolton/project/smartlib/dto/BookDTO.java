@@ -13,6 +13,8 @@ public class BookDTO {
 
     private List<RentDTO> rentDTOList;
 
+    private List<CellDTO> cellDTOList;
+
     public BookDTO() {
     }
 
@@ -72,6 +74,14 @@ public class BookDTO {
         this.rentDTOList = rentDTOList;
     }
 
+    public List<CellDTO> getCellDTOList() {
+        return cellDTOList;
+    }
+
+    public void setCellDTOList(List<CellDTO> cellDTOList) {
+        this.cellDTOList = cellDTOList;
+    }
+
     @Override
     public String toString() {
         return "BookDTO{" +
@@ -81,6 +91,7 @@ public class BookDTO {
                 ", bookisstatus='" + bookisstatus + '\'' +
                 ", rackDTO=" + rackDTO +
                 ", rentDTOList=" + rentDTOList +
+                ", cellDTOList=" + cellDTOList +
                 '}';
     }
 }

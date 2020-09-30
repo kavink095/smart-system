@@ -9,24 +9,24 @@ public class UserDTO {
     private String userlname;
     private String useraddress;
     private String usermobile;
+    private String userEnterStatus;
     private int useractivestatus;
 
-    private LibraryDTO libraryDTO;
-
     private List<RentDTO> rentDTOList;
+
+    private List<LibraryDTO> libraryDTOList;
 
     public UserDTO() {
     }
 
-    public UserDTO(String userid, String userfname, String userlname, String useraddress, String usermobile, int useractivestatus, LibraryDTO libraryDTO, List<RentDTO> rentDTOList) {
+    public UserDTO(String userid, String userfname, String userlname, String useraddress, String usermobile, String userEnterStatus, int useractivestatus) {
         this.userid = userid;
         this.userfname = userfname;
         this.userlname = userlname;
         this.useraddress = useraddress;
         this.usermobile = usermobile;
+        this.userEnterStatus = userEnterStatus;
         this.useractivestatus = useractivestatus;
-        this.libraryDTO = libraryDTO;
-        this.rentDTOList = rentDTOList;
     }
 
     public String getUserid() {
@@ -69,20 +69,20 @@ public class UserDTO {
         this.usermobile = usermobile;
     }
 
+    public String getUserEnterStatus() {
+        return userEnterStatus;
+    }
+
+    public void setUserEnterStatus(String userEnterStatus) {
+        this.userEnterStatus = userEnterStatus;
+    }
+
     public int getUseractivestatus() {
         return useractivestatus;
     }
 
     public void setUseractivestatus(int useractivestatus) {
         this.useractivestatus = useractivestatus;
-    }
-
-    public LibraryDTO getLibraryDTO() {
-        return libraryDTO;
-    }
-
-    public void setLibraryDTO(LibraryDTO libraryDTO) {
-        this.libraryDTO = libraryDTO;
     }
 
     public List<RentDTO> getRentDTOList() {
@@ -93,6 +93,14 @@ public class UserDTO {
         this.rentDTOList = rentDTOList;
     }
 
+    public List<LibraryDTO> getLibraryDTOList() {
+        return libraryDTOList;
+    }
+
+    public void setLibraryDTOList(List<LibraryDTO> libraryDTOList) {
+        this.libraryDTOList = libraryDTOList;
+    }
+
     @Override
     public String toString() {
         return "UserDTO{" +
@@ -101,9 +109,10 @@ public class UserDTO {
                 ", userlname='" + userlname + '\'' +
                 ", useraddress='" + useraddress + '\'' +
                 ", usermobile='" + usermobile + '\'' +
+                ", userEnterStatus='" + userEnterStatus + '\'' +
                 ", useractivestatus=" + useractivestatus +
-                ", libraryDTO=" + libraryDTO +
                 ", rentDTOList=" + rentDTOList +
+                ", libraryDTOList=" + libraryDTOList +
                 '}';
     }
 }

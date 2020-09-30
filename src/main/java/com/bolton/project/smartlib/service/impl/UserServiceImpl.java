@@ -2,6 +2,7 @@ package com.bolton.project.smartlib.service.impl;
 
 import com.bolton.project.smartlib.dto.UserDTO;
 import com.bolton.project.smartlib.entity.User;
+import com.bolton.project.smartlib.repository.AccountRepository;
 import com.bolton.project.smartlib.repository.LibraryRepository;
 import com.bolton.project.smartlib.repository.UserRepository;
 import com.bolton.project.smartlib.service.UserService;
@@ -21,7 +22,7 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Autowired
-    private LibraryRepository libraryRepository;
+    private AccountRepository accountRepository;
 
     @Override
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -36,8 +37,6 @@ public class UserServiceImpl implements UserService {
         user.setUsermobile(userDTO.getUsermobile());
         user.setUseractivestatus(userDTO.getUseractivestatus());
 
-        user.setLibrary(libraryRepository.getOne(Integer.valueOf(userDTO.getLibraryDTO().getLibid())));
-
         userRepository.save(user);
 
         return true;
@@ -45,12 +44,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserDTO> getAll(Pageable pageable) throws Exception {
+    public List<User> getAll(Pageable pageable) throws Exception {
         return null;
     }
+
 
     @Override
     public boolean deleteUser(String nic) {
         return false;
+    }
+
+    @Override
+    public UserDTO findUser(String nic) {
+        User user = userRepository.findById(nic).get();
+        return new UserDTO(user.getUserid(), user.getUserfname(), user.getUserlname(), user.getUseraddress(), user.getUsermobile(), user.getUserEnterStatus(), user.getUseractivestatus());
     }
 }

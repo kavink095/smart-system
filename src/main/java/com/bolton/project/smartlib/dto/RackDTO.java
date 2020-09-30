@@ -9,15 +9,20 @@ public class RackDTO {
 
     private LibraryDTO libraryDTO;
 
+    private CellDTO cellDTO;
+
+    private List<LibraryDTO> libraryDTOList;
+
     private List<BookDTO> bookDTOList;
 
     public RackDTO() {
     }
 
-    public RackDTO(String rackid, String rackdesc, LibraryDTO libraryDTO) {
+    public RackDTO(String rackid, String rackdesc, LibraryDTO libraryDTO, CellDTO cellDTO) {
         this.rackid = rackid;
         this.rackdesc = rackdesc;
         this.libraryDTO = libraryDTO;
+        this.cellDTO = cellDTO;
     }
 
     public String getRackid() {
@@ -44,6 +49,22 @@ public class RackDTO {
         this.libraryDTO = libraryDTO;
     }
 
+    public CellDTO getCellDTO() {
+        return cellDTO;
+    }
+
+    public void setCellDTO(CellDTO cellDTO) {
+        this.cellDTO = cellDTO;
+    }
+
+    public List<LibraryDTO> getLibraryDTOList() {
+        return libraryDTOList;
+    }
+
+    public void setLibraryDTOList(List<LibraryDTO> libraryDTOList) {
+        this.libraryDTOList = libraryDTOList;
+    }
+
     public List<BookDTO> getBookDTOList() {
         return bookDTOList;
     }
@@ -58,6 +79,8 @@ public class RackDTO {
                 "rackid='" + rackid + '\'' +
                 ", rackdesc='" + rackdesc + '\'' +
                 ", libraryDTO=" + libraryDTO +
+                ", cellDTO=" + cellDTO +
+                ", libraryDTOList=" + libraryDTOList +
                 ", bookDTOList=" + bookDTOList +
                 '}';
     }

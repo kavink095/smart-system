@@ -19,28 +19,24 @@ public class Library {
     private String libcity;
 
     @ManyToOne
-    @JoinColumn(name = "acid", nullable = false)
-    private Account account;
+    @JoinColumn(name = "userid", nullable = false)
+    private User user;
 
     @ManyToOne
     @JoinColumn(name = "rackid", nullable = false)
     private Rack rack;
 
-    @OneToMany(mappedBy = "library")
-    private List<User> userList;
-
-    @OneToMany(mappedBy = "library")
-    private List<Rack> rackList;
-
     public Library() {
     }
 
-    public Library(int libid, String libname, String libcontact, String libaddress, String libcity) {
+    public Library(int libid, String libname, String libcontact, String libaddress, String libcity, User user, Rack rack) {
         this.libid = libid;
         this.libname = libname;
         this.libcontact = libcontact;
         this.libaddress = libaddress;
         this.libcity = libcity;
+        this.user = user;
+        this.rack = rack;
     }
 
     public int getLibid() {
@@ -83,20 +79,20 @@ public class Library {
         this.libcity = libcity;
     }
 
-    public List<User> getUserList() {
-        return userList;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserList(List<User> userList) {
-        this.userList = userList;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public List<Rack> getRackList() {
-        return rackList;
+    public Rack getRack() {
+        return rack;
     }
 
-    public void setRackList(List<Rack> rackList) {
-        this.rackList = rackList;
+    public void setRack(Rack rack) {
+        this.rack = rack;
     }
 
     @Override
@@ -107,8 +103,8 @@ public class Library {
                 ", libcontact='" + libcontact + '\'' +
                 ", libaddress='" + libaddress + '\'' +
                 ", libcity='" + libcity + '\'' +
-                ", userList=" + userList +
-                ", rackList=" + rackList +
+                ", user=" + user +
+                ", rack=" + rack +
                 '}';
     }
 }

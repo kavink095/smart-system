@@ -1,5 +1,7 @@
 package com.bolton.project.smartlib.entity;
 
+import com.bolton.project.smartlib.dto.LibraryDTO;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -17,30 +19,29 @@ public class User {
     private String useraddress;
     @Column(name = "usermobile")
     private String usermobile;
+    @Column(name = "userEnterStatus")
+    private String userEnterStatus;
     @Column(name = "useractivestatus")
     private int useractivestatus;
 
-    @ManyToOne
-    @JoinColumn(name = "libid", nullable = false)
-    private Library library;
+    @OneToMany(mappedBy = "user")
+    private List<LibraryDTO> libraryDTOList;
 
     @OneToMany(mappedBy = "user")
     private List<Rent> rentList;
 
-    @OneToMany(mappedBy = "user")
-    private List<UserEnter> userEnterList;
 
     public User() {
     }
 
-    public User(String userid, String userfname, String userlname, String useraddress, String usermobile, int useractivestatus, Library library) {
+    public User(String userid, String userfname, String userlname, String useraddress, String usermobile, String userEnterStatus, int useractivestatus) {
         this.userid = userid;
         this.userfname = userfname;
         this.userlname = userlname;
         this.useraddress = useraddress;
         this.usermobile = usermobile;
+        this.userEnterStatus = userEnterStatus;
         this.useractivestatus = useractivestatus;
-        this.library = library;
     }
 
     public String getUserid() {
@@ -83,6 +84,14 @@ public class User {
         this.usermobile = usermobile;
     }
 
+    public String getUserEnterStatus() {
+        return userEnterStatus;
+    }
+
+    public void setUserEnterStatus(String userEnterStatus) {
+        this.userEnterStatus = userEnterStatus;
+    }
+
     public int getUseractivestatus() {
         return useractivestatus;
     }
@@ -91,12 +100,12 @@ public class User {
         this.useractivestatus = useractivestatus;
     }
 
-    public Library getLibrary() {
-        return library;
+    public List<LibraryDTO> getLibraryDTOList() {
+        return libraryDTOList;
     }
 
-    public void setLibrary(Library library) {
-        this.library = library;
+    public void setLibraryDTOList(List<LibraryDTO> libraryDTOList) {
+        this.libraryDTOList = libraryDTOList;
     }
 
     public List<Rent> getRentList() {
@@ -115,8 +124,9 @@ public class User {
                 ", userlname='" + userlname + '\'' +
                 ", useraddress='" + useraddress + '\'' +
                 ", usermobile='" + usermobile + '\'' +
+                ", userEnterStatus=" + userEnterStatus +
                 ", useractivestatus=" + useractivestatus +
-                ", library=" + library +
+                ", libraryDTOList=" + libraryDTOList +
                 ", rentList=" + rentList +
                 '}';
     }
