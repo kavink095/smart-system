@@ -1,7 +1,5 @@
 package com.bolton.project.smartlib.entity;
 
-import com.bolton.project.smartlib.dto.LibraryDTO;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -24,17 +22,17 @@ public class User {
     @Column(name = "useractivestatus")
     private int useractivestatus;
 
-    @OneToMany(mappedBy = "user")
-    private List<Library> libraryList;
+    @ManyToOne
+    @JoinColumn(name = "libid", nullable = false)
+    private Library library;
 
     @OneToMany(mappedBy = "user")
-    private List<Rent> rentList;
-
+    private List<UserRBook> userRBookList;
 
     public User() {
     }
 
-    public User(String userid, String userfname, String userlname, String useraddress, String usermobile, String userEnterStatus, int useractivestatus) {
+    public User(String userid, String userfname, String userlname, String useraddress, String usermobile, String userEnterStatus, int useractivestatus, Library library) {
         this.userid = userid;
         this.userfname = userfname;
         this.userlname = userlname;
@@ -42,6 +40,7 @@ public class User {
         this.usermobile = usermobile;
         this.userEnterStatus = userEnterStatus;
         this.useractivestatus = useractivestatus;
+        this.library = library;
     }
 
     public String getUserid() {
@@ -100,20 +99,20 @@ public class User {
         this.useractivestatus = useractivestatus;
     }
 
-    public List<Library> getLibraryList() {
-        return libraryList;
+    public Library getLibrary() {
+        return library;
     }
 
-    public void setLibraryList(List<Library> libraryList) {
-        this.libraryList = libraryList;
+    public void setLibrary(Library library) {
+        this.library = library;
     }
 
-    public List<Rent> getRentList() {
-        return rentList;
+    public List<UserRBook> getUserRBookList() {
+        return userRBookList;
     }
 
-    public void setRentList(List<Rent> rentList) {
-        this.rentList = rentList;
+    public void setUserRBookList(List<UserRBook> userRBookList) {
+        this.userRBookList = userRBookList;
     }
 
     @Override
@@ -126,8 +125,8 @@ public class User {
                 ", usermobile='" + usermobile + '\'' +
                 ", userEnterStatus='" + userEnterStatus + '\'' +
                 ", useractivestatus=" + useractivestatus +
-                ", libraryList=" + libraryList +
-                ", rentList=" + rentList +
+                ", library=" + library +
+                ", userRBookList=" + userRBookList +
                 '}';
     }
 }

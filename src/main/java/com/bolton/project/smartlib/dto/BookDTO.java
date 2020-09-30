@@ -9,21 +9,19 @@ public class BookDTO {
     private String bookname;
     private String bookisstatus;
 
-    private RackDTO rackDTO;
+    private CellDTO cellDTO;
 
-    private List<RentDTO> rentDTOList;
-
-    private List<CellDTO> cellDTOList;
+    private List<UserBookDTO> userBookDTOList;
 
     public BookDTO() {
     }
 
-    public BookDTO(String bookrefid, String bookcategory, String bookname, String bookisstatus, RackDTO rackDTO) {
+    public BookDTO(String bookrefid, String bookcategory, String bookname, String bookisstatus, CellDTO cellDTO) {
         this.bookrefid = bookrefid;
         this.bookcategory = bookcategory;
         this.bookname = bookname;
         this.bookisstatus = bookisstatus;
-        this.rackDTO = rackDTO;
+        this.cellDTO = cellDTO;
     }
 
     public String getBookrefid() {
@@ -58,28 +56,20 @@ public class BookDTO {
         this.bookisstatus = bookisstatus;
     }
 
-    public RackDTO getRackDTO() {
-        return rackDTO;
+    public CellDTO getCellDTO() {
+        return cellDTO;
     }
 
-    public void setRackDTO(RackDTO rackDTO) {
-        this.rackDTO = rackDTO;
+    public void setCellDTO(CellDTO cellDTO) {
+        this.cellDTO = cellDTO;
     }
 
-    public List<RentDTO> getRentDTOList() {
-        return rentDTOList;
+    public List<UserBookDTO> getUserBookDTOList() {
+        return userBookDTOList;
     }
 
-    public void setRentDTOList(List<RentDTO> rentDTOList) {
-        this.rentDTOList = rentDTOList;
-    }
-
-    public List<CellDTO> getCellDTOList() {
-        return cellDTOList;
-    }
-
-    public void setCellDTOList(List<CellDTO> cellDTOList) {
-        this.cellDTOList = cellDTOList;
+    public void setUserBookDTOList(List<UserBookDTO> userBookDTOList) {
+        this.userBookDTOList = userBookDTOList;
     }
 
     @Override
@@ -89,9 +79,8 @@ public class BookDTO {
                 ", bookcategory='" + bookcategory + '\'' +
                 ", bookname='" + bookname + '\'' +
                 ", bookisstatus='" + bookisstatus + '\'' +
-                ", rackDTO=" + rackDTO +
-                ", rentDTOList=" + rentDTOList +
-                ", cellDTOList=" + cellDTOList +
+                ", cellDTO=" + cellDTO +
+                ", userBookDTOList=" + userBookDTOList +
                 '}';
     }
 }

@@ -12,14 +12,14 @@ public class UserDTO {
     private String userEnterStatus;
     private int useractivestatus;
 
-    private List<RentDTO> rentDTOList;
+    private LibraryDTO libraryDTO;
 
-    private List<LibraryDTO> libraryDTOList;
+    private List<UserBookDTO> userBookDTOList;
 
     public UserDTO() {
     }
 
-    public UserDTO(String userid, String userfname, String userlname, String useraddress, String usermobile, String userEnterStatus, int useractivestatus) {
+    public UserDTO(String userid, String userfname, String userlname, String useraddress, String usermobile, String userEnterStatus, int useractivestatus, LibraryDTO library) {
         this.userid = userid;
         this.userfname = userfname;
         this.userlname = userlname;
@@ -27,6 +27,7 @@ public class UserDTO {
         this.usermobile = usermobile;
         this.userEnterStatus = userEnterStatus;
         this.useractivestatus = useractivestatus;
+        this.libraryDTO = library;
     }
 
     public String getUserid() {
@@ -85,20 +86,20 @@ public class UserDTO {
         this.useractivestatus = useractivestatus;
     }
 
-    public List<RentDTO> getRentDTOList() {
-        return rentDTOList;
+    public LibraryDTO getLibrary() {
+        return libraryDTO;
     }
 
-    public void setRentDTOList(List<RentDTO> rentDTOList) {
-        this.rentDTOList = rentDTOList;
+    public void setLibrary(LibraryDTO library) {
+        this.libraryDTO = library;
     }
 
-    public List<LibraryDTO> getLibraryDTOList() {
-        return libraryDTOList;
+    public List<UserBookDTO> getUserBookDTOList() {
+        return userBookDTOList;
     }
 
-    public void setLibraryDTOList(List<LibraryDTO> libraryDTOList) {
-        this.libraryDTOList = libraryDTOList;
+    public void setUserBookDTOList(List<UserBookDTO> userBookDTOList) {
+        this.userBookDTOList = userBookDTOList;
     }
 
     @Override
@@ -111,8 +112,8 @@ public class UserDTO {
                 ", usermobile='" + usermobile + '\'' +
                 ", userEnterStatus='" + userEnterStatus + '\'' +
                 ", useractivestatus=" + useractivestatus +
-                ", rentDTOList=" + rentDTOList +
-                ", libraryDTOList=" + libraryDTOList +
+                ", library=" + libraryDTO +
+                ", userBookDTOList=" + userBookDTOList +
                 '}';
     }
 }

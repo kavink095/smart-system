@@ -18,25 +18,21 @@ public class Library {
     @Column(name = "libcity")
     private String libcity;
 
-    @ManyToOne
-    @JoinColumn(name = "userid", nullable = false)
-    private User user;
+    @OneToMany(mappedBy = "library")
+    private List<User> userList;
 
-    @ManyToOne
-    @JoinColumn(name = "rackid", nullable = false)
-    private Rack rack;
+    @OneToMany(mappedBy = "library")
+    private List<Rack> rackList;
 
     public Library() {
     }
 
-    public Library(int libid, String libname, String libcontact, String libaddress, String libcity, User user, Rack rack) {
+    public Library(int libid, String libname, String libcontact, String libaddress, String libcity) {
         this.libid = libid;
         this.libname = libname;
         this.libcontact = libcontact;
         this.libaddress = libaddress;
         this.libcity = libcity;
-        this.user = user;
-        this.rack = rack;
     }
 
     public int getLibid() {
@@ -79,20 +75,20 @@ public class Library {
         this.libcity = libcity;
     }
 
-    public User getUser() {
-        return user;
+    public List<User> getUserList() {
+        return userList;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserList(List<User> userList) {
+        this.userList = userList;
     }
 
-    public Rack getRack() {
-        return rack;
+    public List<Rack> getRackList() {
+        return rackList;
     }
 
-    public void setRack(Rack rack) {
-        this.rack = rack;
+    public void setRackList(List<Rack> rackList) {
+        this.rackList = rackList;
     }
 
     @Override
@@ -103,8 +99,8 @@ public class Library {
                 ", libcontact='" + libcontact + '\'' +
                 ", libaddress='" + libaddress + '\'' +
                 ", libcity='" + libcity + '\'' +
-                ", user=" + user +
-                ", rack=" + rack +
+                ", userList=" + userList +
+                ", rackList=" + rackList +
                 '}';
     }
 }

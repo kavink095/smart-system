@@ -37,8 +37,6 @@ public class BookServiceImpl implements BookService {
         book.setBookname(bookDTO.getBookname());
         book.setBookisstatus(bookDTO.getBookisstatus());
 
-        book.setRack(rackRepository.getOne(String.valueOf(bookDTO.getRackDTO().getRackid())));
-
         bookRepository.save(book);
 
         return true;

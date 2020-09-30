@@ -10,21 +10,19 @@ public class LibraryDTO {
     private String libaddress;
     private String libcity;
 
-    private UserDTO userDTO;
+    private List<UserDTO> userDTOList;
 
-    private RackDTO rackDTO;
+    private List<RackDTO> rackDTOList;
 
     public LibraryDTO() {
     }
 
-    public LibraryDTO(int libid, String libname, String libcontact, String libaddress, String libcity, UserDTO userDTO, RackDTO rackDTO) {
+    public LibraryDTO(int libid, String libname, String libcontact, String libaddress, String libcity) {
         this.libid = libid;
         this.libname = libname;
         this.libcontact = libcontact;
         this.libaddress = libaddress;
         this.libcity = libcity;
-        this.userDTO = userDTO;
-        this.rackDTO = rackDTO;
     }
 
     public int getLibid() {
@@ -67,20 +65,20 @@ public class LibraryDTO {
         this.libcity = libcity;
     }
 
-    public UserDTO getUserDTO() {
-        return userDTO;
+    public List<UserDTO> getUserDTOList() {
+        return userDTOList;
     }
 
-    public void setUserDTO(UserDTO userDTO) {
-        this.userDTO = userDTO;
+    public void setUserDTOList(List<UserDTO> userDTOList) {
+        this.userDTOList = userDTOList;
     }
 
-    public RackDTO getRackDTO() {
-        return rackDTO;
+    public List<RackDTO> getRackDTOList() {
+        return rackDTOList;
     }
 
-    public void setRackDTO(RackDTO rackDTO) {
-        this.rackDTO = rackDTO;
+    public void setRackDTOList(List<RackDTO> rackDTOList) {
+        this.rackDTOList = rackDTOList;
     }
 
     @Override
@@ -91,8 +89,8 @@ public class LibraryDTO {
                 ", libcontact='" + libcontact + '\'' +
                 ", libaddress='" + libaddress + '\'' +
                 ", libcity='" + libcity + '\'' +
-                ", userDTO=" + userDTO +
-                ", rackDTO=" + rackDTO +
+                ", userDTOList=" + userDTOList +
+                ", rackDTOList=" + rackDTOList +
                 '}';
     }
 }

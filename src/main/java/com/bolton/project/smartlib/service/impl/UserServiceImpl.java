@@ -24,25 +24,24 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-    public boolean CreateUser(UserDTO userDTO) {
+    public int CreateUser(UserDTO userDTO) {
 
-        try {
+
             User user = new User();
+
             user.setUserid(userDTO.getUserid());
             user.setUserfname(userDTO.getUserfname());
-
             user.setUserlname(userDTO.getUserlname());
             user.setUseraddress(userDTO.getUseraddress());
             user.setUsermobile(userDTO.getUsermobile());
+            user.setUserEnterStatus(userDTO.getUserEnterStatus());
             user.setUseractivestatus(userDTO.getUseractivestatus());
 
             userRepository.save(user);
 
-        } catch (Exception e) {
-            logger.debug(e.getMessage(), e);
-            throw e;
-        }
-        return true;
+            return 1;
+
+
 
     }
 
@@ -65,7 +64,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO findUser(String nic) {
-        User user = userRepository.findById(nic).get();
-        return new UserDTO(user.getUserid(), user.getUserfname(), user.getUserlname(), user.getUseraddress(), user.getUsermobile(), user.getUserEnterStatus(), user.getUseractivestatus());
+        return null;
     }
+
+
 }

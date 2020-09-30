@@ -16,24 +16,16 @@ public class Rack {
     @JoinColumn(name = "libid", nullable = false)
     private Library library;
 
-    @ManyToOne
-    @JoinColumn(name = "celid", nullable = false)
-    private Cell cell;
-
     @OneToMany(mappedBy = "rack")
-    private List<Library> libraryList;
-
-    @OneToMany(mappedBy = "rack")
-    private List<Book> bookList;
+    private List<Cell> cellList;
 
     public Rack() {
     }
 
-    public Rack(String rackid, String rackdesc, Library library, Cell cell) {
+    public Rack(String rackid, String rackdesc, Library library) {
         this.rackid = rackid;
         this.rackdesc = rackdesc;
         this.library = library;
-        this.cell = cell;
     }
 
     public String getRackid() {
@@ -60,28 +52,12 @@ public class Rack {
         this.library = library;
     }
 
-    public Cell getCell() {
-        return cell;
+    public List<Cell> getCellList() {
+        return cellList;
     }
 
-    public void setCell(Cell cell) {
-        this.cell = cell;
-    }
-
-    public List<Library> getLibraryList() {
-        return libraryList;
-    }
-
-    public void setLibraryList(List<Library> libraryList) {
-        this.libraryList = libraryList;
-    }
-
-    public List<Book> getBookList() {
-        return bookList;
-    }
-
-    public void setBookList(List<Book> bookList) {
-        this.bookList = bookList;
+    public void setCellList(List<Cell> cellList) {
+        this.cellList = cellList;
     }
 
     @Override
@@ -90,9 +66,7 @@ public class Rack {
                 "rackid='" + rackid + '\'' +
                 ", rackdesc='" + rackdesc + '\'' +
                 ", library=" + library +
-                ", cell=" + cell +
-                ", libraryList=" + libraryList +
-                ", bookList=" + bookList +
+                ", cellList=" + cellList +
                 '}';
     }
 }

@@ -7,7 +7,7 @@ import java.util.List;
 @Table(name = "book")
 public class Book {
     @Id
-    @Column(name = "bookrefid")
+    @Column(name = "bookrefid", updatable = false)
     private String bookrefid;
     @Column(name = "bookcategory")
     private String bookcategory;
@@ -16,26 +16,22 @@ public class Book {
     @Column(name = "bookisstatus")
     private String bookisstatus;
 
-    @ManyToOne
-    @JoinColumn(name = "rackid", nullable = false)
-    private Rack rack;
+    @ManyToOne()
+    @JoinColumn(name = "celid", nullable = false)
+    private Cell cell;
 
-    @OneToMany(mappedBy = "book")
-    private List<Rent> rentList;
-
-    @OneToMany(mappedBy = "book")
-    private List<Cell> cellList;
-
+    @OneToMany(mappedBy = "user")
+    private List<UserRBook> userRBookList;
 
     public Book() {
     }
 
-    public Book(String bookrefid, String bookcategory, String bookname, String bookisstatus, Rack rack) {
+    public Book(String bookrefid, String bookcategory, String bookname, String bookisstatus, Cell cell) {
         this.bookrefid = bookrefid;
         this.bookcategory = bookcategory;
         this.bookname = bookname;
         this.bookisstatus = bookisstatus;
-        this.rack = rack;
+        this.cell = cell;
     }
 
     public String getBookrefid() {
@@ -70,28 +66,20 @@ public class Book {
         this.bookisstatus = bookisstatus;
     }
 
-    public Rack getRack() {
-        return rack;
+    public Cell getCell() {
+        return cell;
     }
 
-    public void setRack(Rack rack) {
-        this.rack = rack;
+    public void setCell(Cell cell) {
+        this.cell = cell;
     }
 
-    public List<Rent> getRentList() {
-        return rentList;
+    public List<UserRBook> getUserRBookList() {
+        return userRBookList;
     }
 
-    public void setRentList(List<Rent> rentList) {
-        this.rentList = rentList;
-    }
-
-    public List<Cell> getCellList() {
-        return cellList;
-    }
-
-    public void setCellList(List<Cell> cellList) {
-        this.cellList = cellList;
+    public void setUserRBookList(List<UserRBook> userRBookList) {
+        this.userRBookList = userRBookList;
     }
 
     @Override
@@ -101,9 +89,8 @@ public class Book {
                 ", bookcategory='" + bookcategory + '\'' +
                 ", bookname='" + bookname + '\'' +
                 ", bookisstatus='" + bookisstatus + '\'' +
-                ", rack=" + rack +
-                ", rentList=" + rentList +
-                ", cellList=" + cellList +
+                ", cell=" + cell +
+                ", userRBookList=" + userRBookList +
                 '}';
     }
 }
