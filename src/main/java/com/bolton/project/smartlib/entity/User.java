@@ -25,7 +25,7 @@ public class User {
     private int useractivestatus;
 
     @OneToMany(mappedBy = "user")
-    private List<LibraryDTO> libraryDTOList;
+    private List<Library> libraryList;
 
     @OneToMany(mappedBy = "user")
     private List<Rent> rentList;
@@ -100,12 +100,12 @@ public class User {
         this.useractivestatus = useractivestatus;
     }
 
-    public List<LibraryDTO> getLibraryDTOList() {
-        return libraryDTOList;
+    public List<Library> getLibraryList() {
+        return libraryList;
     }
 
-    public void setLibraryDTOList(List<LibraryDTO> libraryDTOList) {
-        this.libraryDTOList = libraryDTOList;
+    public void setLibraryList(List<Library> libraryList) {
+        this.libraryList = libraryList;
     }
 
     public List<Rent> getRentList() {
@@ -124,9 +124,9 @@ public class User {
                 ", userlname='" + userlname + '\'' +
                 ", useraddress='" + useraddress + '\'' +
                 ", usermobile='" + usermobile + '\'' +
-                ", userEnterStatus=" + userEnterStatus +
+                ", userEnterStatus='" + userEnterStatus + '\'' +
                 ", useractivestatus=" + useractivestatus +
-                ", libraryDTOList=" + libraryDTOList +
+                ", libraryList=" + libraryList +
                 ", rentList=" + rentList +
                 '}';
     }

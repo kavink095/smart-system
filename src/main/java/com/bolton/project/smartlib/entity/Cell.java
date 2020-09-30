@@ -14,17 +14,20 @@ public class Cell {
     private String celid;
     private String celldesc;
 
-    private List<RackDTO> rackDTOList;
+    @OneToMany(mappedBy = "cell")
+    private List<Rack> rackList;
 
-    private BookDTO bookDTO;
+    @ManyToOne()
+    @JoinColumn(name = "bookrefid", nullable = false)
+    private Book book;
 
     public Cell() {
     }
 
-    public Cell(String celid, String celldesc, BookDTO bookDTO) {
+    public Cell(String celid, String celldesc, Book book) {
         this.celid = celid;
         this.celldesc = celldesc;
-        this.bookDTO = bookDTO;
+        this.book = book;
     }
 
     public String getCelid() {
@@ -43,20 +46,20 @@ public class Cell {
         this.celldesc = celldesc;
     }
 
-    public List<RackDTO> getRackDTOList() {
-        return rackDTOList;
+    public List<Rack> getRackList() {
+        return rackList;
     }
 
-    public void setRackDTOList(List<RackDTO> rackDTOList) {
-        this.rackDTOList = rackDTOList;
+    public void setRackList(List<Rack> rackList) {
+        this.rackList = rackList;
     }
 
-    public BookDTO getBookDTO() {
-        return bookDTO;
+    public Book getBook() {
+        return book;
     }
 
-    public void setBookDTO(BookDTO bookDTO) {
-        this.bookDTO = bookDTO;
+    public void setBook(Book book) {
+        this.book = book;
     }
 
     @Override
@@ -64,8 +67,8 @@ public class Cell {
         return "Cell{" +
                 "celid='" + celid + '\'' +
                 ", celldesc='" + celldesc + '\'' +
-                ", rackDTOList=" + rackDTOList +
-                ", bookDTO=" + bookDTO +
+                ", rackList=" + rackList +
+                ", book=" + book +
                 '}';
     }
 }
