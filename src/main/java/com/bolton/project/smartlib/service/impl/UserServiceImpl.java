@@ -1,9 +1,9 @@
 package com.bolton.project.smartlib.service.impl;
 
 import com.bolton.project.smartlib.dto.UserDTO;
-import com.bolton.project.smartlib.entity.User;
+import com.bolton.project.smartlib.entity.Users;
 import com.bolton.project.smartlib.repository.LibraryRepository;
-import com.bolton.project.smartlib.repository.UserRepository;
+import com.bolton.project.smartlib.repository.UsersRepository;
 import com.bolton.project.smartlib.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +21,7 @@ public class UserServiceImpl implements UserService {
     Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Autowired
-    private UserRepository userRepository;
+    private UsersRepository usersRepository;
 
     @Autowired
     private LibraryRepository libraryRepository;
@@ -31,19 +31,19 @@ public class UserServiceImpl implements UserService {
     public boolean CreateUser(UserDTO userDTO) {
 
         try {
-            User user = new User();
+            Users user = new Users();
 
             user.setUserid(userDTO.getUserid());
             user.setUserfname(userDTO.getUserfname());
             user.setUserlname(userDTO.getUserlname());
             user.setUseraddress(userDTO.getUseraddress());
             user.setUsermobile(userDTO.getUsermobile());
-            user.setUserEnterStatus(userDTO.getUserEnterStatus());
+            user.setUserenteretatus(userDTO.getUserenteretatus());
             user.setUseractivestatus(userDTO.getUseractivestatus());
 
             user.setLibrary(libraryRepository.getOne(Integer.valueOf(userDTO.getLibraryDTO().getLibid())));
 
-            userRepository.save(user);
+            usersRepository.save(user);
 
         } catch (Exception e) {
             logger.debug(e.getMessage(), e);
@@ -53,9 +53,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getAll(Pageable pageable) throws Exception {
+    public List<Users> getAll(Pageable pageable) throws Exception {
         try {
-            return userRepository.findAll(pageable).toList();
+            return usersRepository.findAll(pageable).toList();
         } catch (Exception e) {
             logger.debug(e.getMessage(), e);
             throw e;
@@ -65,7 +65,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean deleteUser(String nic) {
-        userRepository.deleteById(nic);
+        usersRepository.deleteById(nic);
         return true;
     }
 

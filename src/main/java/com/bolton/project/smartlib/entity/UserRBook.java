@@ -12,9 +12,13 @@ public class UserRBook {
     private int userbookid;
     private Date txndate;
 
+    private Date retdate;
+
+    private int mark;
+
     @ManyToOne
     @JoinColumn(name = "userid", nullable = false)
-    private User user;
+    private Users user;
 
     @ManyToOne
     @JoinColumn(name = "bookrefid", nullable = false)
@@ -23,8 +27,10 @@ public class UserRBook {
     public UserRBook() {
     }
 
-    public UserRBook(Date txndate, User user, Book book) {
+    public UserRBook(Date txndate, Date retdate, int mark, Users user, Book book) {
         this.txndate = txndate;
+        this.retdate = retdate;
+        this.mark = mark;
         this.user = user;
         this.book = book;
     }
@@ -45,11 +51,27 @@ public class UserRBook {
         this.txndate = txndate;
     }
 
-    public User getUser() {
+    public Date getRetdate() {
+        return retdate;
+    }
+
+    public void setRetdate(Date retdate) {
+        this.retdate = retdate;
+    }
+
+    public int getMark() {
+        return mark;
+    }
+
+    public void setMark(int mark) {
+        this.mark = mark;
+    }
+
+    public Users getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(Users user) {
         this.user = user;
     }
 
@@ -66,6 +88,8 @@ public class UserRBook {
         return "UserRBook{" +
                 "userbookid=" + userbookid +
                 ", txndate=" + txndate +
+                ", retdate=" + retdate +
+                ", mark=" + mark +
                 ", user=" + user +
                 ", book=" + book +
                 '}';

@@ -9,7 +9,7 @@ public class UserDTO {
     private String userlname;
     private String useraddress;
     private String usermobile;
-    private String userEnterStatus;
+    private String userenteretatus;
     private int useractivestatus;
 
     private LibraryDTO libraryDTO;
@@ -19,15 +19,15 @@ public class UserDTO {
     public UserDTO() {
     }
 
-    public UserDTO(String userid, String userfname, String userlname, String useraddress, String usermobile, String userEnterStatus, int useractivestatus, LibraryDTO library) {
+    public UserDTO(String userid, String userfname, String userlname, String useraddress, String usermobile, String userenteretatus, int useractivestatus, LibraryDTO libraryDTO) {
         this.userid = userid;
         this.userfname = userfname;
         this.userlname = userlname;
         this.useraddress = useraddress;
         this.usermobile = usermobile;
-        this.userEnterStatus = userEnterStatus;
+        this.userenteretatus = userenteretatus;
         this.useractivestatus = useractivestatus;
-        this.libraryDTO = library;
+        this.libraryDTO = libraryDTO;
     }
 
     public String getUserid() {
@@ -70,12 +70,12 @@ public class UserDTO {
         this.usermobile = usermobile;
     }
 
-    public String getUserEnterStatus() {
-        return userEnterStatus;
+    public String getUserenteretatus() {
+        return userenteretatus;
     }
 
-    public void setUserEnterStatus(String userEnterStatus) {
-        this.userEnterStatus = userEnterStatus;
+    public void setUserenteretatus(String userenteretatus) {
+        this.userenteretatus = userenteretatus;
     }
 
     public int getUseractivestatus() {
@@ -110,7 +110,7 @@ public class UserDTO {
                 ", userlname='" + userlname + '\'' +
                 ", useraddress='" + useraddress + '\'' +
                 ", usermobile='" + usermobile + '\'' +
-                ", userEnterStatus='" + userEnterStatus + '\'' +
+                ", userenteretatus='" + userenteretatus + '\'' +
                 ", useractivestatus=" + useractivestatus +
                 ", libraryDTO=" + libraryDTO +
                 ", userBookDTOList=" + userBookDTOList +

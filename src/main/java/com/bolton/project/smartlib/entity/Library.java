@@ -19,7 +19,7 @@ public class Library {
     private String libcity;
 
     @OneToMany(mappedBy = "library")
-    private List<User> userList;
+    private List<Users> userList;
 
     @OneToMany(mappedBy = "library")
     private List<Rack> rackList;
@@ -75,11 +75,11 @@ public class Library {
         this.libcity = libcity;
     }
 
-    public List<User> getUserList() {
+    public List<Users> getUserList() {
         return userList;
     }
 
-    public void setUserList(List<User> userList) {
+    public void setUserList(List<Users> userList) {
         this.userList = userList;
     }
 
