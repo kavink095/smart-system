@@ -1,8 +1,5 @@
 package com.bolton.project.smartlib.entity;
 
-import com.bolton.project.smartlib.dto.BookDTO;
-import com.bolton.project.smartlib.dto.RackDTO;
-
 import javax.persistence.*;
 import java.util.List;
 
