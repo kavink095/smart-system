@@ -16,11 +16,11 @@ public class UserRBook {
 
     private int mark;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userid", nullable = false)
     private Users user;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "bookrefid", nullable = false)
     private Book book;
 

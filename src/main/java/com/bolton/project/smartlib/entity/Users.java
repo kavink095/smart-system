@@ -21,11 +21,11 @@ public class Users {
     private String userenteretatus;
     @Column(name = "useractivestatus")
     private int useractivestatus;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "libid", nullable = false)
     private Library library;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "user")
     private List<UserRBook> userRBookList;
 
     public Users() {

@@ -11,6 +11,9 @@ import java.util.List;
 @Repository
 public interface UsersRepository extends JpaRepository<Users, String> {
 
-    @Query(value = "select u.userenteretatus,u.useractivestatus,b.mark from users u  inner join userbook b on u.userid=b.userid where u.userid=:userid",nativeQuery = true)
-    Users findUserByEnter(@Param("userid") String userid);
+    @Query(value = "select u.userid,u.libid,u.useraddress,u.userfname,u.userlname,u.usermobile, " +
+            "u.userenteretatus,u.useractivestatus,b.mark from users u  " +
+            "inner join userbook b on u.userid=b.userid where u.userid=:userRefId",nativeQuery = true)
+    Users findUserByEnter(@Param("userRefId") String userRefId);
+
 }

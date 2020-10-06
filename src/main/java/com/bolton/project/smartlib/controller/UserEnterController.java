@@ -22,4 +22,10 @@ public class UserEnterController {
         refid = "U1";
         return userEnterService.openDoor(refid);
     }
+
+    @PutMapping("/bookmark")
+    public boolean enterBookUpdate(String bookid) throws SQLException {
+        bookid = "BF1";
+        return userEnterService.retBook(bookid);
+    }
 }
