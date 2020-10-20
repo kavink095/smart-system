@@ -26,18 +26,18 @@ public class UserEnterServiceImpl implements UserEnterService {
     public int openDoor(String userRefId) throws SQLException {
         int returnSts = 0;
         try {
-            Users user = usersRepository.findUserByEnter(userRefId);
+//            Users user = usersRepository.findUserByEnter(userRefId);
             UserRBook userRBook = userRBookRepository.findBookByUser(userRefId);
 
-            if (user.getUserenteretatus().equalsIgnoreCase("E") || Integer.valueOf(userRBook.getMark()).equals("1")) {
-                returnSts = 0;
+            if (Integer.valueOf(userRBook.getMark()).equals("1")) {
+                returnSts = 1;
             }
 
             return returnSts;
 
         } catch (Exception e) {
             e.printStackTrace();
-            return 0;
+            return 1;
         }
     }
 

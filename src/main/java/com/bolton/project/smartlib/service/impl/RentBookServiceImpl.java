@@ -25,9 +25,13 @@ public class RentBookServiceImpl implements RentBookService {
     public boolean newRent(UserBookDTO userBookDTO) {
         UserRBook userRBook = new UserRBook();
 
+        int mark = 1;
+
         userRBook.setTxndate(userBookDTO.getTxndate());
         userRBook.setRetdate(userBookDTO.getRetdate());
         userRBook.setMark(userBookDTO.getMark());
+
+        userRBook.setRackmark(mark);
 
         userRBook.setUser(usersRepository.getOne(userBookDTO.getUserDTO().getUserid()));
         userRBook.setBook(bookRepository.getOne(userBookDTO.getBookDTO().getBookrefid()));
@@ -35,4 +39,11 @@ public class RentBookServiceImpl implements RentBookService {
 
         return true;
     }
+
+    @Override
+    public int retBook(String bookRefId) {
+        userRBookRepository.updateRackMark(bookRefId);
+        return 0;
+    }
+
 }
