@@ -15,4 +15,5 @@ public interface UserService {
     public boolean deleteUser(String nic);
 
     public UserDTO findUser(String nic);
+
 }

@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.*;
+import java.util.List;
 
 @Service
 @Transactional(propagation = Propagation.SUPPORTS)
@@ -22,15 +23,27 @@ public class UserEnterServiceImpl implements UserEnterService {
     @Autowired
     private UserRBookRepository userRBookRepository;
 
+    @Transactional(propagation = Propagation.REQUIRED)
     @Override
-    public int openDoor(String userRefId) throws SQLException {
+    public int openDoor(String userid) throws SQLException {
         int returnSts = 0;
         try {
 //            Users user = usersRepository.findUserByEnter(userRefId);
-            UserRBook userRBook = userRBookRepository.findBookByUser(userRefId);
 
-            if (Integer.valueOf(userRBook.getMark()).equals("1")) {
+//            UserRBook userRBook = userRBookRepository.findBookByUser(userid);
+//            String sql = "select u.mark from userbook u where u.userid= '" + userid + "'";
+
+//            UserRBook userB = userRBookRepository.findUserRBookByUserAndUserbookid(userid);
+            UserRBook userB = userRBookRepository.findByUserUserid("U1");
+
+            if (userB == null) {
+                throw new RuntimeException("invalid user !");
+            }
+
+            if (userB.getMark()==1) {
                 returnSts = 1;
+            } else {
+                returnSts = 0;
             }
 
             return returnSts;

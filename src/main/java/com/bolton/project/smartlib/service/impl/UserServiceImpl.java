@@ -5,6 +5,7 @@ import com.bolton.project.smartlib.entity.Users;
 import com.bolton.project.smartlib.repository.LibraryRepository;
 import com.bolton.project.smartlib.repository.UsersRepository;
 import com.bolton.project.smartlib.service.UserService;
+import org.apache.catalina.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
