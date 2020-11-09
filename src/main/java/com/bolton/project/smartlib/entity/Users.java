@@ -21,6 +21,7 @@ public class Users {
     private String userenteretatus;
     @Column(name = "useractivestatus")
     private int useractivestatus;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "libid", nullable = false)
     private Library library;
@@ -124,7 +125,6 @@ public class Users {
                 ", usermobile='" + usermobile + '\'' +
                 ", userenteretatus='" + userenteretatus + '\'' +
                 ", useractivestatus=" + useractivestatus +
-                ", library=" + library +
                 ", userRBookList=" + userRBookList +
                 '}';
     }

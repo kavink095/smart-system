@@ -89,7 +89,6 @@ public class Book {
                 ", bookcategory='" + bookcategory + '\'' +
                 ", bookname='" + bookname + '\'' +
                 ", bookisstatus='" + bookisstatus + '\'' +
-                ", cell=" + cell +
                 ", userRBookList=" + userRBookList +
                 '}';
     }

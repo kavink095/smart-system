@@ -34,7 +34,7 @@ public class UserEnterServiceImpl implements UserEnterService {
 //            String sql = "select u.mark from userbook u where u.userid= '" + userid + "'";
 
 //            UserRBook userB = userRBookRepository.findUserRBookByUserAndUserbookid(userid);
-            UserRBook userB = userRBookRepository.findByUserUserid("U1");
+            UserRBook userB = userRBookRepository.findUserRBookByUserAndUserbookid(userid);
 
             if (userB == null) {
                 throw new RuntimeException("invalid user !");
