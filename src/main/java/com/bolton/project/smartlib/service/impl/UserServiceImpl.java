@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -52,15 +53,15 @@ public class UserServiceImpl implements UserService {
         return true;
     }
 
-    @Override
-    public List<Users> getAll(Pageable pageable) throws Exception {
-        try {
-            return usersRepository.findAll(pageable).toList();
-        } catch (Exception e) {
-            logger.debug(e.getMessage(), e);
-            throw e;
-        }
-    }
+//    @Override
+//    public List<Users> getAll(Pageable pageable) throws Exception {
+//        try {
+//            return usersRepository.findAll(pageable).toList();
+//        } catch (Exception e) {
+//            logger.debug(e.getMessage(), e);
+//            throw e;
+//        }
+//    }
 
 
     @Override

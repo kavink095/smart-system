@@ -38,7 +38,6 @@ public class BookServiceImpl implements BookService {
         book.setBookisstatus(bookDTO.getBookisstatus());
 
         bookRepository.save(book);
-
         return true;
     }
 
