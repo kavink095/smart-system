@@ -6,30 +6,33 @@ public class UserDTO {
 
     private String userid;
     private String userfname;
+    private String usermail;
     private String userlname;
     private String useraddress;
     private String usermobile;
     private String userenteretatus;
     private int useractivestatus;
+    private String userpassword;
 
-    private LibraryDTO libraryDTO;
+    private int libraryDTO;
 
     private List<UserBookDTO> userBookDTOList;
 
     public UserDTO() {
     }
 
-    public UserDTO(String userid, String userfname, String userlname, String useraddress, String usermobile, String userenteretatus, int useractivestatus, LibraryDTO libraryDTO) {
+    public UserDTO(String userid, String userfname, String usermail, String userlname, String useraddress, String usermobile, String userenteretatus, int useractivestatus, String userpassword, int libraryDTO) {
         this.userid = userid;
         this.userfname = userfname;
+        this.usermail = usermail;
         this.userlname = userlname;
         this.useraddress = useraddress;
         this.usermobile = usermobile;
         this.userenteretatus = userenteretatus;
         this.useractivestatus = useractivestatus;
+        this.userpassword = userpassword;
         this.libraryDTO = libraryDTO;
     }
-
     public String getUserid() {
         return userid;
     }
@@ -44,6 +47,14 @@ public class UserDTO {
 
     public void setUserfname(String userfname) {
         this.userfname = userfname;
+    }
+
+    public String getUsermail() {
+        return usermail;
+    }
+
+    public void setUsermail(String usermail) {
+        this.usermail = usermail;
     }
 
     public String getUserlname() {
@@ -86,11 +97,19 @@ public class UserDTO {
         this.useractivestatus = useractivestatus;
     }
 
-    public LibraryDTO getLibraryDTO() {
+    public String getUserpassword() {
+        return userpassword;
+    }
+
+    public void setUserpassword(String userpassword) {
+        this.userpassword = userpassword;
+    }
+
+    public int getLibraryDTO() {
         return libraryDTO;
     }
 
-    public void setLibraryDTO(LibraryDTO libraryDTO) {
+    public void setLibraryDTO(int libraryDTO) {
         this.libraryDTO = libraryDTO;
     }
 
@@ -107,11 +126,13 @@ public class UserDTO {
         return "UserDTO{" +
                 "userid='" + userid + '\'' +
                 ", userfname='" + userfname + '\'' +
+                ", usermail='" + usermail + '\'' +
                 ", userlname='" + userlname + '\'' +
                 ", useraddress='" + useraddress + '\'' +
                 ", usermobile='" + usermobile + '\'' +
                 ", userenteretatus='" + userenteretatus + '\'' +
                 ", useractivestatus=" + useractivestatus +
+                ", userpassword='" + userpassword + '\'' +
                 ", libraryDTO=" + libraryDTO +
                 ", userBookDTOList=" + userBookDTOList +
                 '}';

@@ -16,4 +16,6 @@ public interface UserService {
 
     public UserDTO findUser(String nic);
 
+    public List<UserDTO> login(String usermail,String password);
+
 }
