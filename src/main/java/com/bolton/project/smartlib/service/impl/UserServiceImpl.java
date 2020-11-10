@@ -9,6 +9,7 @@ import org.apache.catalina.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -76,6 +77,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO findUser(String nic) {
+        usersRepository.findAll();
         return null;
     }
 
@@ -98,6 +100,4 @@ public class UserServiceImpl implements UserService {
         }
       return all;
     }
-
-
 }

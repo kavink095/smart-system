@@ -4,6 +4,7 @@ import com.bolton.project.smartlib.dto.UserDTO;
 import com.bolton.project.smartlib.entity.Users;
 import com.bolton.project.smartlib.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -26,5 +27,9 @@ public class UserController {
     @PostMapping("/login")
     public List<UserDTO> login(@RequestBody UserDTO userDTO) {
         return userService.login(userDTO.getUsermail(),userDTO.getUserpassword());
+    }
+
+    public Page<Users> showUsers(@RequestParam(defaultValue = "0") int page){
+        return null;
     }
 }

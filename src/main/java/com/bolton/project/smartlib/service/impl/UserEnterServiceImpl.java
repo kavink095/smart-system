@@ -28,12 +28,6 @@ public class UserEnterServiceImpl implements UserEnterService {
     public int openDoor(String userid) throws SQLException {
         int returnSts = 0;
         try {
-//            Users user = usersRepository.findUserByEnter(userRefId);
-
-//            UserRBook userRBook = userRBookRepository.findBookByUser(userid);
-//            String sql = "select u.mark from userbook u where u.userid= '" + userid + "'";
-
-//            UserRBook userB = userRBookRepository.findUserRBookByUserAndUserbookid(userid);
             UserRBook userB = userRBookRepository.findUserRBookByUserAndUserbookid(userid);
 
             if (userB == null) {
