@@ -11,12 +11,11 @@ import java.util.List;
 public interface UserService {
     public boolean CreateUser(UserDTO userDTO);
 
-<<<<<<< HEAD
+
 //        public ArrayList<UserDTO> getAllUsers();
 //    List<Users> getAll(Pageable pageable) throws Exception;
-=======
+
     List<Users> getAll(Pageable pageable) throws Exception;
->>>>>>> 2698a82738debbb125d2d6cc891dfe52036d17be
 
     public boolean deleteUser(String nic);
 

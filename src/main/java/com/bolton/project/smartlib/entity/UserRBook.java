@@ -16,12 +16,11 @@ public class UserRBook {
 
     private int mark;
 
-    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-
+//    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+//    @JoinColumn(name = )
     private int rackmark;
 
     @ManyToOne(fetch = FetchType.LAZY)
-
     @JoinColumn(name = "userid", nullable = false)
     private Users user;
 

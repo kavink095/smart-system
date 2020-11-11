@@ -14,8 +14,7 @@ public class RentController {
     private RentBookServiceImpl rentBookService;
 
     @PostMapping("/new")
-    public boolean rentBook(@RequestBody UserBookDTO userRBookDTO) {
-        rentBookService.newRent(userRBookDTO);
-        return true;
+    public int rentBook(@RequestBody UserBookDTO userRBookDTO) {
+        return rentBookService.newRent(userRBookDTO);
     }
 }

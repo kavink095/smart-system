@@ -7,11 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-<<<<<<< HEAD
-=======
 import java.util.List;
->>>>>>> 2698a82738debbb125d2d6cc891dfe52036d17be
+
 
 @RestController
 @CrossOrigin
@@ -27,13 +24,12 @@ public class UserController {
         return true;
     }
 
-<<<<<<< HEAD
 ///    @GetMapping("/getAll")
 //    public ArrayList<UserDTO> getAllUsers(){
 //        return userService.getAllUsers();
 //    }
 //}
-=======
+
     @PostMapping("/login")
     public List<UserDTO> login(@RequestBody UserDTO userDTO) {
         return userService.login(userDTO.getUsermail(),userDTO.getUserpassword());
@@ -42,5 +38,5 @@ public class UserController {
     public Page<Users> showUsers(@RequestParam(defaultValue = "0") int page){
         return null;
     }
->>>>>>> 2698a82738debbb125d2d6cc891dfe52036d17be
+
 }
