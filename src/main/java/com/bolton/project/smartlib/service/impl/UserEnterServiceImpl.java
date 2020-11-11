@@ -14,6 +14,7 @@ import sun.nio.ch.Util;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import java.sql.*;
+<<<<<<< HEAD
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.YearMonth;
@@ -21,6 +22,8 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 import java.util.Date;
+=======
+>>>>>>> origin/master
 import java.util.List;
 
 @Service
@@ -33,6 +36,7 @@ public class UserEnterServiceImpl implements UserEnterService {
     @Autowired
     private UserRBookRepository userRBookRepository;
 
+    @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public int openDoor(String userid) throws SQLException {
         int returnSts = 1;
@@ -58,6 +62,26 @@ public class UserEnterServiceImpl implements UserEnterService {
                 } else {
                     returnSts = 0;
                 }
+
+        int returnSts = 0;
+        try {
+//            Users user = usersRepository.findUserByEnter(userRefId);
+
+//            UserRBook userRBook = userRBookRepository.findBookByUser(userid);
+//            String sql = "select u.mark from userbook u where u.userid= '" + userid + "'";
+
+//            UserRBook userB = userRBookRepository.findUserRBookByUserAndUserbookid(userid);
+            UserRBook userB = userRBookRepository.findByUserUserid("U1");
+
+            if (userB == null) {
+                throw new RuntimeException("invalid user !");
+            }
+
+            if (userB.getMark()==1) {
+                returnSts = 1;
+            } else {
+                returnSts = 0;
+
             }
 
             return returnSts;
@@ -65,6 +89,7 @@ public class UserEnterServiceImpl implements UserEnterService {
         } catch (Exception e) {
             e.printStackTrace();
             return 1;
+
         }
     }
 
@@ -72,6 +97,7 @@ public class UserEnterServiceImpl implements UserEnterService {
     public static int monthsBetween(Date d1, Date d2) {
         if (d2 == null || d1 == null) {
             return -1;//Error
+
         }
         Calendar m_calendar = Calendar.getInstance();
         m_calendar.setTime(d1);

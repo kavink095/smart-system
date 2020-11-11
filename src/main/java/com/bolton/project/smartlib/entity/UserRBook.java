@@ -17,6 +17,11 @@ public class UserRBook {
     private int mark;
 
     @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+
+    private int rackmark;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+
     @JoinColumn(name = "userid", nullable = false)
     private Users user;
 
@@ -27,10 +32,11 @@ public class UserRBook {
     public UserRBook() {
     }
 
-    public UserRBook(Date txndate, Date retdate, int mark, Users user, Book book) {
+    public UserRBook(Date txndate, Date retdate, int mark, int rackmark, Users user, Book book) {
         this.txndate = txndate;
         this.retdate = retdate;
         this.mark = mark;
+        this.rackmark = rackmark;
         this.user = user;
         this.book = book;
     }
@@ -67,6 +73,14 @@ public class UserRBook {
         this.mark = mark;
     }
 
+    public int getRackmark() {
+        return rackmark;
+    }
+
+    public void setRackmark(int rackmark) {
+        this.rackmark = rackmark;
+    }
+
     public Users getUser() {
         return user;
     }
@@ -90,6 +104,7 @@ public class UserRBook {
                 ", txndate=" + txndate +
                 ", retdate=" + retdate +
                 ", mark=" + mark +
+                ", rackmark=" + rackmark +
                 ", user=" + user +
                 ", book=" + book +
                 '}';

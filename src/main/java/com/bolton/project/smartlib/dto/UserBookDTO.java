@@ -6,10 +6,9 @@ public class UserBookDTO {
 
     private int userbookid;
     private Date txndate;
-
     private Date retdate;
-
     private int mark;
+    private int rackmark;
 
     private UserDTO userDTO;
 
@@ -18,11 +17,12 @@ public class UserBookDTO {
     public UserBookDTO() {
     }
 
-    public UserBookDTO(int userbookid, Date txndate, Date retdate, int mark, UserDTO userDTO, BookDTO bookDTO) {
+    public UserBookDTO(int userbookid, Date txndate, Date retdate, int mark, int rackmark, UserDTO userDTO, BookDTO bookDTO) {
         this.userbookid = userbookid;
         this.txndate = txndate;
         this.retdate = retdate;
         this.mark = mark;
+        this.rackmark = rackmark;
         this.userDTO = userDTO;
         this.bookDTO = bookDTO;
     }
@@ -59,6 +59,14 @@ public class UserBookDTO {
         this.mark = mark;
     }
 
+    public int getRackmark() {
+        return rackmark;
+    }
+
+    public void setRackmark(int rackmark) {
+        this.rackmark = rackmark;
+    }
+
     public UserDTO getUserDTO() {
         return userDTO;
     }
@@ -82,6 +90,7 @@ public class UserBookDTO {
                 ", txndate=" + txndate +
                 ", retdate=" + retdate +
                 ", mark=" + mark +
+                ", rackmark=" + rackmark +
                 ", userDTO=" + userDTO +
                 ", bookDTO=" + bookDTO +
                 '}';
