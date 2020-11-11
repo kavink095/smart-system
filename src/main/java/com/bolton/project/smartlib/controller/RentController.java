@@ -21,7 +21,7 @@ public class RentController {
     }
 
     @GetMapping("/rentCheck")
-    public int checkOldRentStatus(@RequestBody Users user) {
+    public int checkOldRentStatus(@RequestBody Users user)throws Exception {
         return rentBookService.rentBook(user.getUserid());
     }
 }

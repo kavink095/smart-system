@@ -6,5 +6,5 @@ public interface RentBookService {
 
     public boolean newRent(UserBookDTO userBookDTO);
 
-    public int rentBook(String bookRefId);
+    public int rentBook(String bookRefId)throws Exception;
 }
