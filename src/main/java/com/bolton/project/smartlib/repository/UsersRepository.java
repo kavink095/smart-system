@@ -22,7 +22,12 @@ public interface UsersRepository extends JpaRepository<Users, String> {
     @Query(value = "select * from users u where u.usermail= ?1 and u.userpassword= ?2", nativeQuery = true)
     List<Users> findByAndUsermailAndUserpassword(@Param("usermail") String usermail, @Param("userpassword") String userpassword);
 
-    @Query(value = "select * from users u where u.userid= ?1", nativeQuery = true)
-    List<Users> findByUserid(@Param("userid") String userid);
+//    @Query(value = "select * from users u where u.usermail= ?1 ", nativeQuery = true)
+//    List<Users> findByAndUserid(@Param("userid") String userid);
+
+    List<Users> findByUserid(String userid);
+
+//    @Query(value = "select * from users u where u.userid= ?1", nativeQuery = true)
+//    List<Users> findByUserid(@Param("userid") String userid);
 
 }

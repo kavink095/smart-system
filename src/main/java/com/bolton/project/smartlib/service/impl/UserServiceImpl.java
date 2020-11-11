@@ -59,20 +59,20 @@ public class UserServiceImpl implements UserService {
         return true;
     }
 
-    @Override
-    public List<Users> getAll(Pageable pageable) throws Exception {
-        return null;
-    }
-
 //    @Override
 //    public List<Users> getAll(Pageable pageable) throws Exception {
-//        try {
-//            return usersRepository.findAll(pageable).toList();
-//        } catch (Exception e) {
-//            logger.debug(e.getMessage(), e);
-//            throw e;
-//        }
+//        return null;
 //    }
+
+    @Override
+    public List<Users> getAll(Pageable pageable) throws Exception {
+        try {
+            return usersRepository.findAll(pageable).toList();
+        } catch (Exception e) {
+            logger.debug(e.getMessage(), e);
+            throw e;
+        }
+    }
 
     @Override
     public boolean deleteUser(String nic) {

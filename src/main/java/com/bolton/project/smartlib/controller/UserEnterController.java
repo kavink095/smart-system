@@ -2,10 +2,7 @@ package com.bolton.project.smartlib.controller;
 
 import com.bolton.project.smartlib.service.UserEnterService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
 
@@ -17,15 +14,13 @@ public class UserEnterController {
     @Autowired
     private UserEnterService userEnterService;
 
-    @PutMapping("/open")
-    public int enterCheck(String refid) throws SQLException {
-        refid = "U1";
+    @PutMapping("/open/{refid}")
+    public int enterCheck(@PathVariable  String refid) throws SQLException {
         return userEnterService.openDoor(refid);
     }
 
     @PutMapping("/bookmark")
     public boolean enterBookUpdate(String bookid) throws SQLException {
-        bookid = "BF1";
         return userEnterService.retBook(bookid);
     }
 }
