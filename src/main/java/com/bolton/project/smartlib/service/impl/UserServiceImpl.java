@@ -9,10 +9,12 @@ import org.apache.catalina.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +32,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    @ExceptionHandler(value = {Exception.class})
     public boolean CreateUser(UserDTO userDTO) {
 
         try {
@@ -42,8 +45,10 @@ public class UserServiceImpl implements UserService {
             user.setUsermobile(userDTO.getUsermobile());
             user.setUserenteretatus(userDTO.getUserenteretatus());
             user.setUseractivestatus(userDTO.getUseractivestatus());
+            user.setUsermail(userDTO.getUsermail());
+            user.setUserpassword(userDTO.getUserpassword());
 
-            user.setLibrary(libraryRepository.getOne(Integer.valueOf(userDTO.getLibraryDTO().getLibid())));
+            user.setLibrary(libraryRepository.getOne(Integer.valueOf(userDTO.getLibraryDTO())));
 
             usersRepository.save(user);
 
@@ -64,7 +69,6 @@ public class UserServiceImpl implements UserService {
 //        }
 //    }
 
-
     @Override
     public boolean deleteUser(String nic) {
         usersRepository.deleteById(nic);
@@ -73,8 +77,27 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO findUser(String nic) {
+        usersRepository.findAll();
         return null;
     }
 
-
+    @Override
+    public List<UserDTO> login(String usermail, String password) {
+        List<Users>  users = usersRepository.findByAndUsermailAndUserpassword(usermail,password);
+        List<UserDTO> all = new ArrayList<>();
+        for (Users users1: users) {
+            UserDTO userDTO = new UserDTO(users1.getUserid(),
+                    users1.getUserfname(),
+                    users1.getUserfname(),
+                    users1.getUsermail(),
+                    users1.getUserlname(),
+                    users1.getUseraddress(),
+                    users1.getUserenteretatus(),
+                    users1.getUseractivestatus(),
+                    users1.getUserpassword(),
+                    users1.getLibrary().getLibid());
+            all.add(userDTO);
+        }
+      return all;
+    }
 }

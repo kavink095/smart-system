@@ -65,7 +65,6 @@ public class Rack {
         return "Rack{" +
                 "rackid='" + rackid + '\'' +
                 ", rackdesc='" + rackdesc + '\'' +
-                ", library=" + library +
                 ", cellList=" + cellList +
                 '}';
     }

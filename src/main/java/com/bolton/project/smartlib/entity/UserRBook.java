@@ -105,8 +105,8 @@ public class UserRBook {
                 ", retdate=" + retdate +
                 ", mark=" + mark +
                 ", rackmark=" + rackmark +
-                ", user=" + user +
-                ", book=" + book +
+//                ", user=" + user +
+//                ", book=" + book +
                 '}';
     }
 }

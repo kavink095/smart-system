@@ -11,6 +11,8 @@ public class Users {
     private String userid;
     @Column(name = "userfname")
     private String userfname;
+    @Column(name = "usermail")
+    private String usermail;
     @Column(name = "userlname")
     private String userlname;
     @Column(name = "useraddress")
@@ -21,6 +23,9 @@ public class Users {
     private String userenteretatus;
     @Column(name = "useractivestatus")
     private int useractivestatus;
+    @Column(name = "userpassword")
+    private String userpassword;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "libid", nullable = false)
     private Library library;
@@ -31,15 +36,17 @@ public class Users {
     public Users() {
     }
 
-    public Users(String userid, String userfname, String userlname, String useraddress, String usermobile, String userenteretatus, int useractivestatus, Library library) {
+    public Users(String userid, String userfname, String usermail, String userlname, String useraddress, String usermobile, String userenteretatus, int useractivestatus, Library library, String userpassword) {
         this.userid = userid;
         this.userfname = userfname;
+        this.usermail = usermail;
         this.userlname = userlname;
         this.useraddress = useraddress;
         this.usermobile = usermobile;
         this.userenteretatus = userenteretatus;
         this.useractivestatus = useractivestatus;
         this.library = library;
+        this.userpassword = userpassword;
     }
 
     public String getUserid() {
@@ -56,6 +63,14 @@ public class Users {
 
     public void setUserfname(String userfname) {
         this.userfname = userfname;
+    }
+
+    public String getUsermail() {
+        return usermail;
+    }
+
+    public void setUsermail(String usermail) {
+        this.usermail = usermail;
     }
 
     public String getUserlname() {
@@ -114,18 +129,26 @@ public class Users {
         this.userRBookList = userRBookList;
     }
 
+    public String getUserpassword() {
+        return userpassword;
+    }
+
+    public void setUserpassword(String userpassword) {
+        this.userpassword = userpassword;
+    }
+
     @Override
     public String toString() {
         return "Users{" +
                 "userid='" + userid + '\'' +
                 ", userfname='" + userfname + '\'' +
+                ", usermail='" + usermail + '\'' +
                 ", userlname='" + userlname + '\'' +
                 ", useraddress='" + useraddress + '\'' +
                 ", usermobile='" + usermobile + '\'' +
                 ", userenteretatus='" + userenteretatus + '\'' +
                 ", useractivestatus=" + useractivestatus +
-                ", library=" + library +
-                ", userRBookList=" + userRBookList +
+                ", userpassword='" + userpassword + '\'' +
                 '}';
     }
 }
