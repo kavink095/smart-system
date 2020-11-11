@@ -10,10 +10,14 @@ import com.bolton.project.smartlib.repository.UsersRepository;
 import com.bolton.project.smartlib.service.RentBookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.SQLException;
 import java.util.Date;
 
 @Service
+@Transactional(propagation = Propagation.SUPPORTS)
 public class RentBookServiceImpl implements RentBookService {
 
     @Autowired
@@ -28,21 +32,32 @@ public class RentBookServiceImpl implements RentBookService {
     Common common = new Common();
 
     @Override
-    public int newRent(UserBookDTO userBookDTO) {
-        int returnSts = 1;
-        int dateSts = 0;
-
+    public boolean newRent(UserBookDTO userBookDTO) {
+        int markSet = 1;
         try {
 
             UserRBook userRBook = new UserRBook();
             userRBook.setTxndate(userBookDTO.getTxndate());
             userRBook.setRetdate(userBookDTO.getRetdate());
-            userRBook.setMark(userBookDTO.getMark());
+            userRBook.setMark(markSet);
             userRBook.setUser(usersRepository.getOne(userBookDTO.getUserDTO().getUserid()));
             userRBook.setBook(bookRepository.getOne(userBookDTO.getBookDTO().getBookrefid()));
+            userRBookRepository.save(userRBook);
 
-            //get userid
-            String userid = userRBook.getUser().getUserid();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.SUPPORTS)
+    public int rentBook(String userid) {
+        int returnSts = 1;
+        int dateSts = 0;
+
+        try {
 
             String markGetById = userRBookRepository.findUserRBooksByUser(userid);
 
@@ -54,7 +69,7 @@ public class RentBookServiceImpl implements RentBookService {
             /* call common class month between method for calculation return date
              *  A month between is equal or grater than 1,dateStatus is 1.
              *  */
-            if (common.monthBetween(userRBook1.getTxndate(), userRBook1.getRetdate()) >= 1) {
+            if (common.betweenDates(userRBook1.getTxndate(), userRBook1.getRetdate()) >= 30) {
                 dateSts = 1;
             }
             String eMark = markGetById;
@@ -78,22 +93,12 @@ public class RentBookServiceImpl implements RentBookService {
                 returnSts = 0;
             }
 
-            if (returnSts == 0) {
-                userRBookRepository.save(userRBook);
-            } else {
-                throw new Exception("cannot rent new book !");
-            }
-
 
             return returnSts;
+
         } catch (Exception e) {
             e.printStackTrace();
             return 1;
         }
-    }
-
-    @Override
-    public int retBook(String bookRefId) {
-        return 0;
     }
 }

@@ -1,5 +1,8 @@
 package com.bolton.project.smartlib.common;
 
+import java.io.IOException;
+
+import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -15,7 +18,13 @@ public class Common {
         int nMonth1 = 12 * m_calendar.get(Calendar.YEAR) + m_calendar.get(Calendar.MONTH);
         m_calendar.setTime(d2);
         int nMonth2 = 12 * m_calendar.get(Calendar.YEAR) + m_calendar.get(Calendar.MONTH);
-        System.out.println("Date - " + java.lang.Math.abs(nMonth2 - nMonth1));
+        System.out.println("Date between - " + java.lang.Math.abs(nMonth2 - nMonth1));
         return java.lang.Math.abs(nMonth2 - nMonth1);
+    }
+
+
+    public static long betweenDates(Date firstDate, Date secondDate) throws IOException {
+        System.out.println("Days - "+ChronoUnit.DAYS.between(firstDate.toInstant(), secondDate.toInstant()));
+        return ChronoUnit.DAYS.between(firstDate.toInstant(), secondDate.toInstant());
     }
 }

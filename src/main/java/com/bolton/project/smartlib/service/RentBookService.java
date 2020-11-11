@@ -4,7 +4,7 @@ import com.bolton.project.smartlib.dto.UserBookDTO;
 
 public interface RentBookService {
 
-    public int newRent(UserBookDTO userBookDTO);
+    public boolean newRent(UserBookDTO userBookDTO);
 
-    public int retBook(String bookRefId);
+    public int rentBook(String bookRefId);
 }
