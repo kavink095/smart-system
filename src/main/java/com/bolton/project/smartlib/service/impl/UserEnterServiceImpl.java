@@ -2,7 +2,6 @@ package com.bolton.project.smartlib.service.impl;
 
 import com.bolton.project.smartlib.common.Common;
 import com.bolton.project.smartlib.dto.UserDTO;
-import com.bolton.project.smartlib.entity.UserRBook;
 import com.bolton.project.smartlib.entity.Users;
 import com.bolton.project.smartlib.repository.UserRBookRepository;
 import com.bolton.project.smartlib.repository.UsersRepository;
@@ -32,6 +31,8 @@ public class UserEnterServiceImpl implements UserEnterService {
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public int openDoor(String userid) throws SQLException {
+        int userActive = 0;
+        int retStatus = 0;
 
         try {
             List<Users> user = usersRepository.findByUserid(userid);
@@ -40,27 +41,30 @@ public class UserEnterServiceImpl implements UserEnterService {
                 UserDTO userDTO = new UserDTO(
                         users.getUserid(),
                         users.getUserfname(),
-                        users.getUserfname(),
                         users.getUsermail(),
                         users.getUserlname(),
                         users.getUseraddress(),
+                        users.getUsermobile(),
                         users.getUserenteretatus(),
                         users.getUseractivestatus(),
                         users.getUserpassword(),
+                        users.getGender(),
                         users.getLibrary().getLibid());
                 userDTOS.add(userDTO);
 
+                userActive = users.getUseractivestatus();
+
+            }
+            if (userActive == 0){
+                throw new Exception("invalid user !");
+            }else {
+                retStatus = 1;
             }
 
-//            String activeStatus = userDTOS.get(7).toString();
-//            if (activeStatus.equals("0")) {
-//                throw new Exception("Invalid User !");
-//            }
-
-            return 0;
+            return retStatus;
         } catch (Exception e) {
             e.printStackTrace();
-            return 1;
+            return 0;
         }
     }
 

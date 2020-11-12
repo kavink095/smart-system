@@ -24,7 +24,7 @@ public class UserController {
         return true;
     }
 
-///    @GetMapping("/getAll")
+//    @GetMapping("/getAll")
 //    public ArrayList<UserDTO> getAllUsers(){
 //        return userService.getAllUsers();
 //    }

@@ -71,7 +71,7 @@ public class RentBookServiceImpl implements RentBookService {
             /* call common class month between method for calculation return date
              *  A month between is equal or grater than 1,dateStatus is 1.
              *  */
-            if (common.betweenDates(userRBook1.getTxndate(), userRBook1.getRetdate()) >= 15) {
+            if (common.betweenDates(userRBook1.getTxndate(), userRBook1.getRetdate()) >= 30) {
                 dateSts = 1;
             }
             String eMark = markGetById;

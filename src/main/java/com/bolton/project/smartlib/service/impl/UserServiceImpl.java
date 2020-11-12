@@ -35,6 +35,7 @@ public class UserServiceImpl implements UserService {
     @ExceptionHandler(value = {Exception.class})
     public boolean CreateUser(UserDTO userDTO) {
 
+        int libid = 1;
         try {
             Users user = new Users();
 
@@ -48,7 +49,8 @@ public class UserServiceImpl implements UserService {
             user.setUsermail(userDTO.getUsermail());
             user.setUserpassword(userDTO.getUserpassword());
 
-            user.setLibrary(libraryRepository.getOne(Integer.valueOf(userDTO.getLibraryDTO())));
+//            user.setLibrary(libraryRepository.getOne(Integer.valueOf(userDTO.getLibraryDTO())));
+            user.setLibrary(libraryRepository.getOne(libid));
 
             usersRepository.save(user);
 
@@ -93,13 +95,14 @@ public class UserServiceImpl implements UserService {
         for (Users users1: users) {
             UserDTO userDTO = new UserDTO(users1.getUserid(),
                     users1.getUserfname(),
-                    users1.getUserfname(),
                     users1.getUsermail(),
                     users1.getUserlname(),
                     users1.getUseraddress(),
+                    users1.getUsermobile(),
                     users1.getUserenteretatus(),
                     users1.getUseractivestatus(),
                     users1.getUserpassword(),
+                    users1.getGender(),
                     users1.getLibrary().getLibid());
             all.add(userDTO);
         }

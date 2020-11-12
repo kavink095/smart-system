@@ -25,6 +25,8 @@ public class Users {
     private int useractivestatus;
     @Column(name = "userpassword")
     private String userpassword;
+    @Column(name = "gender")
+    private String gender;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "libid", nullable = false)
@@ -36,7 +38,7 @@ public class Users {
     public Users() {
     }
 
-    public Users(String userid, String userfname, String usermail, String userlname, String useraddress, String usermobile, String userenteretatus, int useractivestatus, Library library, String userpassword) {
+    public Users(String userid, String userfname, String usermail, String userlname, String useraddress, String usermobile, String userenteretatus, int useractivestatus, String userpassword, String gender, Library library) {
         this.userid = userid;
         this.userfname = userfname;
         this.usermail = usermail;
@@ -45,8 +47,9 @@ public class Users {
         this.usermobile = usermobile;
         this.userenteretatus = userenteretatus;
         this.useractivestatus = useractivestatus;
-        this.library = library;
         this.userpassword = userpassword;
+        this.gender = gender;
+        this.library = library;
     }
 
     public String getUserid() {
@@ -113,6 +116,22 @@ public class Users {
         this.useractivestatus = useractivestatus;
     }
 
+    public String getUserpassword() {
+        return userpassword;
+    }
+
+    public void setUserpassword(String userpassword) {
+        this.userpassword = userpassword;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
     public Library getLibrary() {
         return library;
     }
@@ -129,14 +148,6 @@ public class Users {
         this.userRBookList = userRBookList;
     }
 
-    public String getUserpassword() {
-        return userpassword;
-    }
-
-    public void setUserpassword(String userpassword) {
-        this.userpassword = userpassword;
-    }
-
     @Override
     public String toString() {
         return "Users{" +
@@ -149,6 +160,7 @@ public class Users {
                 ", userenteretatus='" + userenteretatus + '\'' +
                 ", useractivestatus=" + useractivestatus +
                 ", userpassword='" + userpassword + '\'' +
+                ", gender='" + gender + '\'' +
                 '}';
     }
 }
