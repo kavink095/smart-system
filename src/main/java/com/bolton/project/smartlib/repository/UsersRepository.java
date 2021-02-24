@@ -1,7 +1,5 @@
 package com.bolton.project.smartlib.repository;
 
-import com.bolton.project.smartlib.dto.UserDTO;
-import com.bolton.project.smartlib.entity.UserRBook;
 import com.bolton.project.smartlib.entity.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

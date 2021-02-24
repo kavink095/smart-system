@@ -24,7 +24,8 @@ public class Common {
 
 
     public static long betweenDates(Date firstDate, Date secondDate) throws IOException {
+    	long day = ChronoUnit.DAYS.between(firstDate.toInstant(), secondDate.toInstant());
         System.out.println("Days - "+ChronoUnit.DAYS.between(firstDate.toInstant(), secondDate.toInstant()));
-        return ChronoUnit.DAYS.between(firstDate.toInstant(), secondDate.toInstant());
+        return day;
     }
 }
