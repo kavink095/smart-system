@@ -19,8 +19,6 @@ public interface UserRBookRepository extends JpaRepository<UserRBook, Integer> {
     @Query(value = "select * from userbook u where u.userid= ?1", nativeQuery = true)
     UserRBook findUserRBookByUserAndUserbookid(@Param("userid")String userid);
 
-
-
     @Query(value = "select userbookid,mark,rackmark,retdate,txndate,bookrefid,userid from userbook where bookrefid=:bookId and mark=:marks", nativeQuery = true)
     UserRBook findBookByUserMark(@Param("bookId") String userRefId, @Param("marks") int marks);
 

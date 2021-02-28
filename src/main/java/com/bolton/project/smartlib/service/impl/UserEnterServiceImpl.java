@@ -19,58 +19,49 @@ import java.util.List;
 @Transactional(propagation = Propagation.SUPPORTS)
 public class UserEnterServiceImpl implements UserEnterService {
 
-    @Autowired
-    private UsersRepository usersRepository;
+	@Autowired
+	private UsersRepository usersRepository;
 
-    @Autowired
-    private UserRBookRepository userRBookRepository;
+	@Autowired
+	private UserRBookRepository userRBookRepository;
 
-    //Common classs object
-    Common common = new Common();
+	// Common classs object
+	Common common = new Common();
 
-    @Transactional(propagation = Propagation.REQUIRED)
-    @Override
-    public int openDoor(String userid) throws SQLException {
-        int userActive = 0;
-        int retStatus = 0;
+	@Transactional(propagation = Propagation.REQUIRED)
+	@Override
+	public int openDoor(String userid) throws SQLException {
+		int userActive = 0;
+		int retStatus = 0;
+		System.out.println("service id 1: " + userid);
+		try {
+			List<Users> user = usersRepository.findByUserid(userid);
+			List<UserDTO> userDTOS = new ArrayList<>();
+			for (Users users : user) {
+				UserDTO userDTO = new UserDTO(users.getUserid(), users.getUserfname(), users.getUsermail(),
+						users.getUserlname(), users.getUseraddress(), users.getUsermobile(), users.getUserenteretatus(),
+						users.getUseractivestatus(), users.getUserpassword(), users.getGender(), users.getAuth());
+				userDTOS.add(userDTO);
 
-        try {
-            List<Users> user = usersRepository.findByUserid(userid);
-            List<UserDTO> userDTOS = new ArrayList<>();
-            for (Users users : user) {
-                UserDTO userDTO = new UserDTO(
-                        users.getUserid(),
-                        users.getUserfname(),
-                        users.getUsermail(),
-                        users.getUserlname(),
-                        users.getUseraddress(),
-                        users.getUsermobile(),
-                        users.getUserenteretatus(),
-                        users.getUseractivestatus(),
-                        users.getUserpassword(),
-                        users.getGender(),
-                        users.getLibrary().getLibid());
-                userDTOS.add(userDTO);
+				userActive = users.getUseractivestatus();
 
-                userActive = users.getUseractivestatus();
+			}
+			if (userActive == 0) {
+				throw new Exception("invalid user !");
+			} else {
+				int qry = usersRepository.updateuserenteretatus(userid);
+				retStatus = 1;
+			}
 
-            }
-            if (userActive == 0){
-                throw new Exception("invalid user !");
-            }else {
-                retStatus = 1;
-            }
+			return retStatus;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
 
-            return retStatus;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return 0;
-        }
-    }
-
-
-    @Override
-    public boolean retBook(String bookId) throws SQLException {
-        return false;
-    }
+	@Override
+	public boolean retBook(String bookId) throws SQLException {
+		return false;
+	}
 }

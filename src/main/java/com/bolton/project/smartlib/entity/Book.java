@@ -6,90 +6,99 @@ import java.util.List;
 @Entity
 @Table(name = "book")
 public class Book {
-    @Id
-    @Column(name = "bookrefid", updatable = false)
-    private String bookrefid;
-    @Column(name = "bookcategory")
-    private String bookcategory;
-    @Column(name = "bookname")
-    private String bookname;
-    @Column(name = "bookisstatus")
-    private String bookisstatus;
+	@Id
+	@Column(name = "bookrefid", updatable = false)
+	private String bookrefid;
+	@Column(name = "bookname")
+	private String bookname;
+	@Column(name = "bookwriter")
+	private String bookwriter;
+	@Column(name = "bookdesc")
+	private String bookdesc;
+	@Column(name = "bookisstatus")
+	private String bookisstatus;
 
-    @ManyToOne()
-    @JoinColumn(name = "celid", nullable = false)
-    private Cell cell;
+	@ManyToOne()
+	@JoinColumn(name = "racid", nullable = false)
+	private Rack cell;
 
-    @OneToMany(mappedBy = "user")
-    private List<UserRBook> userRBookList;
+	@OneToMany(mappedBy = "user")
+	private List<UserRBook> userRBookList;
 
-    public Book() {
-    }
+	public Book() {
+	}
 
-    public Book(String bookrefid, String bookcategory, String bookname, String bookisstatus, Cell cell) {
-        this.bookrefid = bookrefid;
-        this.bookcategory = bookcategory;
-        this.bookname = bookname;
-        this.bookisstatus = bookisstatus;
-        this.cell = cell;
-    }
+	public Book(String bookrefid, String bookname, String bookwriter, String bookdesc, String bookisstatus, Rack cell) {
+		super();
+		this.bookrefid = bookrefid;
+		this.bookname = bookname;
+		this.bookwriter = bookwriter;
+		this.bookdesc = bookdesc;
+		this.bookisstatus = bookisstatus;
+		this.cell = cell;
+	}
 
-    public String getBookrefid() {
-        return bookrefid;
-    }
+	public String getBookrefid() {
+		return bookrefid;
+	}
 
-    public void setBookrefid(String bookrefid) {
-        this.bookrefid = bookrefid;
-    }
+	public void setBookrefid(String bookrefid) {
+		this.bookrefid = bookrefid;
+	}
 
-    public String getBookcategory() {
-        return bookcategory;
-    }
+	public String getBookname() {
+		return bookname;
+	}
 
-    public void setBookcategory(String bookcategory) {
-        this.bookcategory = bookcategory;
-    }
+	public void setBookname(String bookname) {
+		this.bookname = bookname;
+	}
 
-    public String getBookname() {
-        return bookname;
-    }
+	public String getBookwriter() {
+		return bookwriter;
+	}
 
-    public void setBookname(String bookname) {
-        this.bookname = bookname;
-    }
+	public void setBookwriter(String bookwriter) {
+		this.bookwriter = bookwriter;
+	}
 
-    public String getBookisstatus() {
-        return bookisstatus;
-    }
+	public String getBookdesc() {
+		return bookdesc;
+	}
 
-    public void setBookisstatus(String bookisstatus) {
-        this.bookisstatus = bookisstatus;
-    }
+	public void setBookdesc(String bookdesc) {
+		this.bookdesc = bookdesc;
+	}
 
-    public Cell getCell() {
-        return cell;
-    }
+	public String getBookisstatus() {
+		return bookisstatus;
+	}
 
-    public void setCell(Cell cell) {
-        this.cell = cell;
-    }
+	public void setBookisstatus(String bookisstatus) {
+		this.bookisstatus = bookisstatus;
+	}
 
-    public List<UserRBook> getUserRBookList() {
-        return userRBookList;
-    }
+	public Rack getCell() {
+		return cell;
+	}
 
-    public void setUserRBookList(List<UserRBook> userRBookList) {
-        this.userRBookList = userRBookList;
-    }
+	public void setCell(Rack cell) {
+		this.cell = cell;
+	}
 
-    @Override
-    public String toString() {
-        return "Book{" +
-                "bookrefid='" + bookrefid + '\'' +
-                ", bookcategory='" + bookcategory + '\'' +
-                ", bookname='" + bookname + '\'' +
-                ", bookisstatus='" + bookisstatus + '\'' +
-                ", userRBookList=" + userRBookList +
-                '}';
-    }
+	public List<UserRBook> getUserRBookList() {
+		return userRBookList;
+	}
+
+	public void setUserRBookList(List<UserRBook> userRBookList) {
+		this.userRBookList = userRBookList;
+	}
+
+	@Override
+	public String toString() {
+		return "Book [bookrefid=" + bookrefid + ", bookname=" + bookname + ", bookwriter=" + bookwriter + ", bookdesc="
+				+ bookdesc + ", bookisstatus=" + bookisstatus + ", cell=" + cell + ", userRBookList=" + userRBookList
+				+ "]";
+	}
+
 }

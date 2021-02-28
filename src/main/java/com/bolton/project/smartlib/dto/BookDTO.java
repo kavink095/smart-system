@@ -2,85 +2,95 @@ package com.bolton.project.smartlib.dto;
 
 import java.util.List;
 
+import javax.persistence.Column;
+
 public class BookDTO {
 
-    private String bookrefid;
-    private String bookcategory;
-    private String bookname;
-    private String bookisstatus;
+	private String bookrefid;
+	private String bookname;
+	private String bookwriter;
+	private String bookdesc;
+	private String bookisstatus;
 
-    private CellDTO cellDTO;
+	private String rackid;
 
-    private List<UserBookDTO> userBookDTOList;
+	private List<UserBookDTO> userBookDTOList;
 
-    public BookDTO() {
-    }
+	public BookDTO() {
+	}
 
-    public BookDTO(String bookrefid, String bookcategory, String bookname, String bookisstatus, CellDTO cellDTO) {
-        this.bookrefid = bookrefid;
-        this.bookcategory = bookcategory;
-        this.bookname = bookname;
-        this.bookisstatus = bookisstatus;
-        this.cellDTO = cellDTO;
-    }
+	public BookDTO(String bookrefid, String bookname, String bookwriter, String bookdesc, String bookisstatus,
+			String rackid) {
+		super();
+		this.bookrefid = bookrefid;
+		this.bookname = bookname;
+		this.bookwriter = bookwriter;
+		this.bookdesc = bookdesc;
+		this.bookisstatus = bookisstatus;
+		this.rackid = rackid;
+	}
 
-    public String getBookrefid() {
-        return bookrefid;
-    }
+	public String getBookrefid() {
+		return bookrefid;
+	}
 
-    public void setBookrefid(String bookrefid) {
-        this.bookrefid = bookrefid;
-    }
+	public void setBookrefid(String bookrefid) {
+		this.bookrefid = bookrefid;
+	}
 
-    public String getBookcategory() {
-        return bookcategory;
-    }
+	public String getBookname() {
+		return bookname;
+	}
 
-    public void setBookcategory(String bookcategory) {
-        this.bookcategory = bookcategory;
-    }
+	public void setBookname(String bookname) {
+		this.bookname = bookname;
+	}
 
-    public String getBookname() {
-        return bookname;
-    }
+	public String getBookwriter() {
+		return bookwriter;
+	}
 
-    public void setBookname(String bookname) {
-        this.bookname = bookname;
-    }
+	public void setBookwriter(String bookwriter) {
+		this.bookwriter = bookwriter;
+	}
 
-    public String getBookisstatus() {
-        return bookisstatus;
-    }
+	public String getBookdesc() {
+		return bookdesc;
+	}
 
-    public void setBookisstatus(String bookisstatus) {
-        this.bookisstatus = bookisstatus;
-    }
+	public void setBookdesc(String bookdesc) {
+		this.bookdesc = bookdesc;
+	}
 
-    public CellDTO getCellDTO() {
-        return cellDTO;
-    }
+	public String getBookisstatus() {
+		return bookisstatus;
+	}
 
-    public void setCellDTO(CellDTO cellDTO) {
-        this.cellDTO = cellDTO;
-    }
+	public void setBookisstatus(String bookisstatus) {
+		this.bookisstatus = bookisstatus;
+	}
 
-    public List<UserBookDTO> getUserBookDTOList() {
-        return userBookDTOList;
-    }
+	public String getRackid() {
+		return rackid;
+	}
 
-    public void setUserBookDTOList(List<UserBookDTO> userBookDTOList) {
-        this.userBookDTOList = userBookDTOList;
-    }
+	public void setRackid(String rackid) {
+		this.rackid = rackid;
+	}
 
-    @Override
-    public String toString() {
-        return "BookDTO{" +
-                "bookrefid='" + bookrefid + '\'' +
-                ", bookcategory='" + bookcategory + '\'' +
-                ", bookname='" + bookname + '\'' +
-                ", bookisstatus='" + bookisstatus + '\'' +
-                ", cellDTO=" + cellDTO +
-                ", userBookDTOList=" + userBookDTOList +
-                '}';
-    }
+	public List<UserBookDTO> getUserBookDTOList() {
+		return userBookDTOList;
+	}
+
+	public void setUserBookDTOList(List<UserBookDTO> userBookDTOList) {
+		this.userBookDTOList = userBookDTOList;
+	}
+
+	@Override
+	public String toString() {
+		return "BookDTO [bookrefid=" + bookrefid + ", bookname=" + bookname + ", bookwriter=" + bookwriter
+				+ ", bookdesc=" + bookdesc + ", bookisstatus=" + bookisstatus + ", rackid=" + rackid
+				+ ", userBookDTOList=" + userBookDTOList + "]";
+	}
+
 }

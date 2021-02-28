@@ -16,6 +16,7 @@ public class RentController {
 
     @PostMapping("/new")
     public boolean rentBook(@RequestBody UserBookDTO userRBookDTO) {
+    	System.out.println("Rent : "+userRBookDTO.toString());
         rentBookService.newRent(userRBookDTO);
         return true;
     }

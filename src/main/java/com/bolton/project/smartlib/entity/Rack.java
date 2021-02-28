@@ -6,66 +6,51 @@ import java.util.List;
 @Entity
 @Table(name = "rack")
 public class Rack {
-    @Id
-    @Column(name = "rackid")
-    private String rackid;
-    @Column(name = "rackdesc")
-    private String rackdesc;
 
-    @ManyToOne
-    @JoinColumn(name = "libid", nullable = false)
-    private Library library;
+	@Id
+	@Column(name = "racid", updatable = false)
+	private String racid;
+	private String rackdesc;
 
-    @OneToMany(mappedBy = "rack")
-    private List<Cell> cellList;
+//	@OneToMany(cascade = CascadeType.ALL,mappedBy = "book")
+//	private List<Book> bookList;
 
-    public Rack() {
-    }
+	public Rack() {
+	}
 
-    public Rack(String rackid, String rackdesc, Library library) {
-        this.rackid = rackid;
-        this.rackdesc = rackdesc;
-        this.library = library;
-    }
+	public Rack(String racid, String rackdesc) {
+		super();
+		this.racid = racid;
+		this.rackdesc = rackdesc;
+	}
 
-    public String getRackid() {
-        return rackid;
-    }
+	public String getRacid() {
+		return racid;
+	}
 
-    public void setRackid(String rackid) {
-        this.rackid = rackid;
-    }
+	public void setRacid(String racid) {
+		this.racid = racid;
+	}
 
-    public String getRackdesc() {
-        return rackdesc;
-    }
+	public String getRackdesc() {
+		return rackdesc;
+	}
 
-    public void setRackdesc(String rackdesc) {
-        this.rackdesc = rackdesc;
-    }
+	public void setRackdesc(String rackdesc) {
+		this.rackdesc = rackdesc;
+	}
+//
+//	public List<Book> getBookList() {
+//		return bookList;
+//	}
+//
+//	public void setBookList(List<Book> bookList) {
+//		this.bookList = bookList;
+//	}
 
-    public Library getLibrary() {
-        return library;
-    }
+//	@Override
+//	public String toString() {
+//		return "Rack [rackid=" + racid + ", rackdesc=" + rackdesc + ", bookList=" + bookList + "]";
+//	}
 
-    public void setLibrary(Library library) {
-        this.library = library;
-    }
-
-    public List<Cell> getCellList() {
-        return cellList;
-    }
-
-    public void setCellList(List<Cell> cellList) {
-        this.cellList = cellList;
-    }
-
-    @Override
-    public String toString() {
-        return "Rack{" +
-                "rackid='" + rackid + '\'' +
-                ", rackdesc='" + rackdesc + '\'' +
-                ", cellList=" + cellList +
-                '}';
-    }
 }

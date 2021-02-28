@@ -9,18 +9,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface UserService {
-    public boolean CreateUser(UserDTO userDTO);
+	public boolean CreateUser(UserDTO userDTO);
 
+	public ArrayList<UserDTO> getAllUsers();
 
-//        public ArrayList<UserDTO> getAllUsers();
+	public ArrayList<UserDTO> getAllActiveUsers();
 //    List<Users> getAll(Pageable pageable) throws Exception;
 
-    List<Users> getAll(Pageable pageable) throws Exception;
+	List<Users> getAll(Pageable pageable) throws Exception;
 
-    public boolean deleteUser(String nic);
+	public boolean deleteUser(String nic);
 
-    public UserDTO findUser(String nic);
+	public UserDTO findUser(String nic);
 
-    public List<UserDTO> login(String usermail,String password);
+	public List<UserDTO> login(String usermail, String password);
 
 }

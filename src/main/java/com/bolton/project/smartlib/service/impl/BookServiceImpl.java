@@ -33,9 +33,12 @@ public class BookServiceImpl implements BookService {
 
         Book book = new Book();
         book.setBookrefid(bookDTO.getBookrefid());
-        book.setBookcategory(bookDTO.getBookcategory());
         book.setBookname(bookDTO.getBookname());
+        book.setBookwriter(bookDTO.getBookwriter());
+        book.setBookdesc(bookDTO.getBookdesc());
         book.setBookisstatus(bookDTO.getBookisstatus());
+//        book.setCell(rackRepository.getOne(bookDTO.getRackid()));
+        book.setCell(rackRepository.getOne("R1"));
 
         bookRepository.save(book);
         return true;

@@ -11,16 +11,17 @@ import java.sql.SQLException;
 @RestController
 public class UserEnterController {
 
-    @Autowired
-    private UserEnterService userEnterService;
+	@Autowired
+	private UserEnterService userEnterService;
 
-    @PutMapping("/open/{refid}")
-    public int enterCheck(@PathVariable  String refid) throws SQLException {
-        return userEnterService.openDoor(refid);
-    }
+	@PutMapping("/open/{refid}")
+	public int enterCheck(@PathVariable String refid) throws SQLException {
+		System.out.println("Controller :" + refid);
+		return userEnterService.openDoor(refid);
+	}
 
-    @PutMapping("/bookmark")
-    public boolean enterBookUpdate(String bookid) throws SQLException {
-        return userEnterService.retBook(bookid);
-    }
+	@PutMapping("/bookmark")
+	public boolean enterBookUpdate(String bookid) throws SQLException {
+		return userEnterService.retBook(bookid);
+	}
 }

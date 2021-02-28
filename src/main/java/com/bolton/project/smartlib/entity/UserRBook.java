@@ -7,105 +7,98 @@ import java.util.Date;
 @Table(name = "userbook")
 public class UserRBook {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int userbookid;
-    private Date txndate;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int userbookid;
+	private Date txndate;
 
-    private Date retdate;
+	private Date retdate;
+	private int mark;
+	private String rackmark;
 
-    private int mark;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "userid", nullable = false)
+	private Users user;
 
-//    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-//    @JoinColumn(name = )
-    private int rackmark;
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "bookrefid", nullable = false)
+	private Book book;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userid", nullable = false)
-    private Users user;
+	public UserRBook() {
+	}
 
-    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    @JoinColumn(name = "bookrefid", nullable = false)
-    private Book book;
+	public UserRBook(int userbookid, Date txndate, Date retdate, int mark, String rackmark, Users user, Book book) {
+		super();
+		this.userbookid = userbookid;
+		this.txndate = txndate;
+		this.retdate = retdate;
+		this.mark = mark;
+		this.rackmark = rackmark;
+		this.user = user;
+		this.book = book;
+	}
 
-    public UserRBook() {
-    }
+	public int getUserbookid() {
+		return userbookid;
+	}
 
-    public UserRBook(Date txndate, Date retdate, int mark, int rackmark, Users user, Book book) {
-        this.txndate = txndate;
-        this.retdate = retdate;
-        this.mark = mark;
-        this.rackmark = rackmark;
-        this.user = user;
-        this.book = book;
-    }
+	public void setUserbookid(int userbookid) {
+		this.userbookid = userbookid;
+	}
 
-    public int getUserbookid() {
-        return userbookid;
-    }
+	public Date getTxndate() {
+		return txndate;
+	}
 
-    public void setUserbookid(int userbookid) {
-        this.userbookid = userbookid;
-    }
+	public void setTxndate(Date txndate) {
+		this.txndate = txndate;
+	}
 
-    public Date getTxndate() {
-        return txndate;
-    }
+	public Date getRetdate() {
+		return retdate;
+	}
 
-    public void setTxndate(Date txndate) {
-        this.txndate = txndate;
-    }
+	public void setRetdate(Date retdate) {
+		this.retdate = retdate;
+	}
 
-    public Date getRetdate() {
-        return retdate;
-    }
+	public int getMark() {
+		return mark;
+	}
 
-    public void setRetdate(Date retdate) {
-        this.retdate = retdate;
-    }
+	public void setMark(int mark) {
+		this.mark = mark;
+	}
 
-    public int getMark() {
-        return mark;
-    }
+	public String getRackmark() {
+		return rackmark;
+	}
 
-    public void setMark(int mark) {
-        this.mark = mark;
-    }
+	public void setRackmark(String rackmark) {
+		this.rackmark = rackmark;
+	}
 
-    public int getRackmark() {
-        return rackmark;
-    }
+	public Users getUser() {
+		return user;
+	}
 
-    public void setRackmark(int rackmark) {
-        this.rackmark = rackmark;
-    }
+	public void setUser(Users user) {
+		this.user = user;
+	}
 
-    public Users getUser() {
-        return user;
-    }
+	public Book getBook() {
+		return book;
+	}
 
-    public void setUser(Users user) {
-        this.user = user;
-    }
+	public void setBook(Book book) {
+		this.book = book;
+	}
 
-    public Book getBook() {
-        return book;
-    }
+	@Override
+	public String toString() {
+		return "UserRBook [userbookid=" + userbookid + ", txndate=" + txndate + ", retdate=" + retdate + ", mark="
+				+ mark + ", rackmark=" + rackmark + ", user=" + user + ", book=" + book + "]";
+	}
 
-    public void setBook(Book book) {
-        this.book = book;
-    }
-
-    @Override
-    public String toString() {
-        return "UserRBook{" +
-                "userbookid=" + userbookid +
-                ", txndate=" + txndate +
-                ", retdate=" + retdate +
-                ", mark=" + mark +
-                ", rackmark=" + rackmark +
-//                ", user=" + user +
-//                ", book=" + book +
-                '}';
-    }
+	
 }

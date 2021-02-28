@@ -4,61 +4,48 @@ import java.util.List;
 
 public class RackDTO {
 
-    private String rackid;
+    private String racid;
     private String rackdesc;
 
-    private LibraryDTO libraryDTO;
-
-    private List<CellDTO> cellDTOList;
+    private List<BookDTO> bookDTOList;
 
     public RackDTO() {
     }
 
-    public RackDTO(String rackid, String rackdesc, LibraryDTO libraryDTO) {
-        this.rackid = rackid;
-        this.rackdesc = rackdesc;
-        this.libraryDTO = libraryDTO;
-    }
+	public RackDTO(String racid, String rackdesc) {
+		super();
+		this.racid = racid;
+		this.rackdesc = rackdesc;
+	}
 
-    public String getRackid() {
-        return rackid;
-    }
+	public String getRacid() {
+		return racid;
+	}
 
-    public void setRackid(String rackid) {
-        this.rackid = rackid;
-    }
+	public void setRackid(String racid) {
+		this.racid = racid;
+	}
 
-    public String getRackdesc() {
-        return rackdesc;
-    }
+	public String getRackdesc() {
+		return rackdesc;
+	}
 
-    public void setRackdesc(String rackdesc) {
-        this.rackdesc = rackdesc;
-    }
+	public void setRackdesc(String rackdesc) {
+		this.rackdesc = rackdesc;
+	}
 
-    public LibraryDTO getLibraryDTO() {
-        return libraryDTO;
-    }
+	public List<BookDTO> getBookDTOList() {
+		return bookDTOList;
+	}
 
-    public void setLibraryDTO(LibraryDTO libraryDTO) {
-        this.libraryDTO = libraryDTO;
-    }
+	public void setBookDTOList(List<BookDTO> bookDTOList) {
+		this.bookDTOList = bookDTOList;
+	}
 
-    public List<CellDTO> getCellDTOList() {
-        return cellDTOList;
-    }
+	@Override
+	public String toString() {
+		return "RackDTO [rackid=" + racid + ", rackdesc=" + rackdesc + ", bookDTOList=" + bookDTOList + "]";
+	}
 
-    public void setCellDTOList(List<CellDTO> cellDTOList) {
-        this.cellDTOList = cellDTOList;
-    }
-
-    @Override
-    public String toString() {
-        return "RackDTO{" +
-                "rackid='" + rackid + '\'' +
-                ", rackdesc='" + rackdesc + '\'' +
-                ", libraryDTO=" + libraryDTO +
-                ", cellDTOList=" + cellDTOList +
-                '}';
-    }
+   
 }

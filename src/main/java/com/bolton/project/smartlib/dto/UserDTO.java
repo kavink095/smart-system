@@ -4,149 +4,132 @@ import java.util.List;
 
 public class UserDTO {
 
-    private String userid;
-    private String userfname;
-    private String usermail;
-    private String userlname;
-    private String useraddress;
-    private String usermobile;
-    private String userenteretatus;
-    private int useractivestatus;
-    private String userpassword;
-    private String gender;
+	private String userid;
+	private String userfname;
+	private String usermail;
+	private String userlname;
+	private String useraddress;
+	private String usermobile;
+	private String userenteretatus;
+	private int useractivestatus;
+	private String userpassword;
+	private String gender;
+	private String auth;
 
-    private int libraryDTO;
+	public UserDTO() {
+	}
 
-    private List<UserBookDTO> userBookDTOList;
+	public UserDTO(String userid, String userfname, String usermail, String userlname, String useraddress,
+			String usermobile, String userenteretatus, int useractivestatus, String userpassword, String gender,
+			String auth) {
+		super();
+		this.userid = userid;
+		this.userfname = userfname;
+		this.usermail = usermail;
+		this.userlname = userlname;
+		this.useraddress = useraddress;
+		this.usermobile = usermobile;
+		this.userenteretatus = userenteretatus;
+		this.useractivestatus = useractivestatus;
+		this.userpassword = userpassword;
+		this.gender = gender;
+		this.auth = auth;
+	}
 
-    public UserDTO() {
-    }
+	public String getUserid() {
+		return userid;
+	}
 
-    public UserDTO(String userid, String userfname, String usermail, String userlname, String useraddress, String usermobile, String userenteretatus, int useractivestatus, String userpassword, String gender, int libraryDTO) {
-        this.userid = userid;
-        this.userfname = userfname;
-        this.usermail = usermail;
-        this.userlname = userlname;
-        this.useraddress = useraddress;
-        this.usermobile = usermobile;
-        this.userenteretatus = userenteretatus;
-        this.useractivestatus = useractivestatus;
-        this.userpassword = userpassword;
-        this.gender = gender;
-        this.libraryDTO = libraryDTO;
-    }
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
 
-    public String getUserid() {
-        return userid;
-    }
+	public String getUserfname() {
+		return userfname;
+	}
 
-    public void setUserid(String userid) {
-        this.userid = userid;
-    }
+	public void setUserfname(String userfname) {
+		this.userfname = userfname;
+	}
 
-    public String getUserfname() {
-        return userfname;
-    }
+	public String getUsermail() {
+		return usermail;
+	}
 
-    public void setUserfname(String userfname) {
-        this.userfname = userfname;
-    }
+	public void setUsermail(String usermail) {
+		this.usermail = usermail;
+	}
 
-    public String getUsermail() {
-        return usermail;
-    }
+	public String getUserlname() {
+		return userlname;
+	}
 
-    public void setUsermail(String usermail) {
-        this.usermail = usermail;
-    }
+	public void setUserlname(String userlname) {
+		this.userlname = userlname;
+	}
 
-    public String getUserlname() {
-        return userlname;
-    }
+	public String getUseraddress() {
+		return useraddress;
+	}
 
-    public void setUserlname(String userlname) {
-        this.userlname = userlname;
-    }
+	public void setUseraddress(String useraddress) {
+		this.useraddress = useraddress;
+	}
 
-    public String getUseraddress() {
-        return useraddress;
-    }
+	public String getUsermobile() {
+		return usermobile;
+	}
 
-    public void setUseraddress(String useraddress) {
-        this.useraddress = useraddress;
-    }
+	public void setUsermobile(String usermobile) {
+		this.usermobile = usermobile;
+	}
 
-    public String getUsermobile() {
-        return usermobile;
-    }
+	public String getUserenteretatus() {
+		return userenteretatus;
+	}
 
-    public void setUsermobile(String usermobile) {
-        this.usermobile = usermobile;
-    }
+	public void setUserenteretatus(String userenteretatus) {
+		this.userenteretatus = userenteretatus;
+	}
 
-    public String getUserenteretatus() {
-        return userenteretatus;
-    }
+	public int getUseractivestatus() {
+		return useractivestatus;
+	}
 
-    public void setUserenteretatus(String userenteretatus) {
-        this.userenteretatus = userenteretatus;
-    }
+	public void setUseractivestatus(int useractivestatus) {
+		this.useractivestatus = useractivestatus;
+	}
 
-    public int getUseractivestatus() {
-        return useractivestatus;
-    }
+	public String getUserpassword() {
+		return userpassword;
+	}
 
-    public void setUseractivestatus(int useractivestatus) {
-        this.useractivestatus = useractivestatus;
-    }
+	public void setUserpassword(String userpassword) {
+		this.userpassword = userpassword;
+	}
 
-    public String getUserpassword() {
-        return userpassword;
-    }
+	public String getGender() {
+		return gender;
+	}
 
-    public void setUserpassword(String userpassword) {
-        this.userpassword = userpassword;
-    }
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
 
-    public String getGender() {
-        return gender;
-    }
+	public String getAuth() {
+		return auth;
+	}
 
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
+	public void setAuth(String auth) {
+		this.auth = auth;
+	}
 
-    public int getLibraryDTO() {
-        return libraryDTO;
-    }
+	@Override
+	public String toString() {
+		return "UserDTO [userid=" + userid + ", userfname=" + userfname + ", usermail=" + usermail + ", userlname="
+				+ userlname + ", useraddress=" + useraddress + ", usermobile=" + usermobile + ", userenteretatus="
+				+ userenteretatus + ", useractivestatus=" + useractivestatus + ", userpassword=" + userpassword
+				+ ", gender=" + gender + ", auth=" + auth + "]";
+	}
 
-    public void setLibraryDTO(int libraryDTO) {
-        this.libraryDTO = libraryDTO;
-    }
-
-    public List<UserBookDTO> getUserBookDTOList() {
-        return userBookDTOList;
-    }
-
-    public void setUserBookDTOList(List<UserBookDTO> userBookDTOList) {
-        this.userBookDTOList = userBookDTOList;
-    }
-
-    @Override
-    public String toString() {
-        return "UserDTO{" +
-                "userid='" + userid + '\'' +
-                ", userfname='" + userfname + '\'' +
-                ", usermail='" + usermail + '\'' +
-                ", userlname='" + userlname + '\'' +
-                ", useraddress='" + useraddress + '\'' +
-                ", usermobile='" + usermobile + '\'' +
-                ", userenteretatus='" + userenteretatus + '\'' +
-                ", useractivestatus=" + useractivestatus +
-                ", userpassword='" + userpassword + '\'' +
-                ", gender='" + gender + '\'' +
-                ", libraryDTO=" + libraryDTO +
-                ", userBookDTOList=" + userBookDTOList +
-                '}';
-    }
 }

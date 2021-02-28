@@ -16,86 +16,90 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 
-
 @Service
 @Transactional(propagation = Propagation.SUPPORTS)
 public class RentBookServiceImpl implements RentBookService {
-    Logger logger = LoggerFactory.getLogger(RentBookServiceImpl.class);
+	Logger logger = LoggerFactory.getLogger(RentBookServiceImpl.class);
 
-    @Autowired
-    private UserRBookRepository userRBookRepository;
+	@Autowired
+	private UserRBookRepository userRBookRepository;
 
-    @Autowired
-    private BookRepository bookRepository;
+	@Autowired
+	private BookRepository bookRepository;
 
-    @Autowired
-    private UsersRepository usersRepository;
+	@Autowired
+	private UsersRepository usersRepository;
 
-    Common common = new Common();
+	Common common = new Common();
 
-    @Override
-    public boolean newRent(UserBookDTO userBookDTO) {
-        int markSet = 1;
-        try {
+	@Override
+	@Transactional(propagation = Propagation.SUPPORTS)
+	public boolean newRent(UserBookDTO userBookDTO) {
+		int markSet = 1;
+		try {
 
-            UserRBook userRBook = new UserRBook();
-            userRBook.setTxndate(userBookDTO.getTxndate());
-            userRBook.setRetdate(userBookDTO.getRetdate());
-            userRBook.setMark(markSet);
-            userRBook.setUser(usersRepository.getOne(userBookDTO.getUserDTO().getUserid()));
-            userRBook.setBook(bookRepository.getOne(userBookDTO.getBookDTO().getBookrefid()));
-            userRBookRepository.save(userRBook);
+			java.util.Date utilDate = new java.util.Date();
+			java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
 
-            return true;
-        } catch (Exception e) {
-            logger.debug(e.getMessage(), e);
-            throw e;
-        }
-    }
+			UserRBook userRBook = new UserRBook();
+			userRBook.setTxndate(sqlDate);
+			userRBook.setRetdate(sqlDate);
+			userRBook.setMark(markSet);
+			userRBook.setUser(usersRepository.getOne(userBookDTO.getUser()));
+			userRBook.setBook(bookRepository.getOne(userBookDTO.getBook()));
+			userRBookRepository.save(userRBook);
 
-    @Override
-    @Transactional(propagation = Propagation.SUPPORTS)
-    public int rentBook(String userid) throws Exception {
-        int returnSts = 1;
-        int dateSts = 0;
+			return true;
+		} catch (Exception e) {
+			logger.debug(e.getMessage(), e);
+			throw e;
+		}
+	}
 
-        try {
+	@Override
+	@Transactional(propagation = Propagation.SUPPORTS)
+	public int rentBook(String userid) throws Exception {
+		int returnSts = 1;
+		int dateSts = 0;
 
-            String markGetById = userRBookRepository.findUserRBooksByUser(userid);
+		try {
 
-            UserRBook userRBook1 = userRBookRepository.findUserRBooksByUserAndRetdate(userid);
+			String markGetById = userRBookRepository.findUserRBooksByUser(userid);
 
-            Date dtf = new Date();
-            dtf.getDate();
+			UserRBook userRBook1 = userRBookRepository.findUserRBooksByUserAndRetdate(userid);
 
-            /* call common class month between method for calculation return date
-             *  A month between is equal or grater than 1,dateStatus is 1.
-             *  */
-            if (common.betweenDates(userRBook1.getTxndate(), userRBook1.getRetdate()) >= 30) {
-                dateSts = 1;
-            }
-            String eMark = markGetById;
+			Date dtf = new Date();
+			dtf.getDate();
 
-            if (dateSts == 1) {
-                throw new Exception("Please return old books now!");
-            }
+			/*
+			 * call common class month between method for calculation return date A month
+			 * between is equal or grater than 1,dateStatus is 1.
+			 */
+			if (common.betweenDates(userRBook1.getTxndate(), userRBook1.getRetdate()) >= 30) {
+				dateSts = 1;
+			}
+			String eMark = markGetById;
 
-            UserRBook userB = userRBookRepository.findUserRBookByUserAndUserbookid(userid);
+			if (dateSts == 1) {
+				throw new Exception("Please return old books now!");
+			}
 
-            if (userB == null) {
-                throw new Exception("invalid user !");
-            }
-            if (userB.getMark() == 1) {
-                returnSts = 1;
-            } else {
-                returnSts = 0;
-            }
+			UserRBook userB = userRBookRepository.findUserRBookByUserAndUserbookid(userid);
 
-            return returnSts;
+			if (userB == null) {
+				throw new Exception("invalid user !");
+			}
+			if (userB.getMark() == 1) {
+				returnSts = 1;
+			} else {
+				returnSts = 0;
+			}
 
-        } catch (Exception e) {
-            logger.debug(e.getMessage());
-            throw e;
-        }
-    }
+			return returnSts;
+
+		} catch (Exception e) {
+			logger.debug(e.getMessage());
+			throw e;
+		}
+	}
 }
