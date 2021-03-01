@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 
+import com.bolton.project.smartlib.entity.Rack;
+
 public class BookDTO {
 
 	private String bookrefid;
@@ -29,6 +31,7 @@ public class BookDTO {
 		this.bookisstatus = bookisstatus;
 		this.rackid = rackid;
 	}
+
 
 	public String getBookrefid() {
 		return bookrefid;
@@ -92,5 +95,7 @@ public class BookDTO {
 				+ ", bookdesc=" + bookdesc + ", bookisstatus=" + bookisstatus + ", rackid=" + rackid
 				+ ", userBookDTOList=" + userBookDTOList + "]";
 	}
+
+
 
 }

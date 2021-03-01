@@ -13,4 +13,5 @@ public interface BookService {
     List<Book> getAll(Pageable pageable) throws Exception;
 
     public boolean deleteBook(String id);
+	public List<BookDTO> checkBook(String bookrefid);
 }

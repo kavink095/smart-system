@@ -113,4 +113,18 @@ public class UserServiceImpl implements UserService {
 				user.getUseractivestatus(), user.getUserpassword(), user.getGender(),user.getAuth())));
 		return userDTOs;
 	}
+
+	@Override
+	public List<UserDTO> checkUser(String userId) {
+		List<Users> users = usersRepository.findByUserid(userId);
+		System.out.println("List :"+users.toString());
+		List<UserDTO> all = new ArrayList<>();
+		for (Users users1 : users) {
+			UserDTO userDTO = new UserDTO(users1.getUserid(), users1.getUserfname(), users1.getUsermail(),
+					users1.getUserlname(), users1.getUseraddress(), users1.getUsermobile(), users1.getUserenteretatus(),
+					users1.getUseractivestatus(), users1.getUserpassword(), users1.getGender(),users1.getAuth());
+			all.add(userDTO);
+		}
+		return all;
+	}
 }

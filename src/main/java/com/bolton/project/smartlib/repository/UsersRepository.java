@@ -21,6 +21,9 @@ public interface UsersRepository extends JpaRepository<Users, String> {
 
     @Query(value = "select * from users u where u.usermail= ?1 and u.userpassword= ?2", nativeQuery = true)
     List<Users> findByAndUsermailAndUserpassword(@Param("usermail") String usermail, @Param("userpassword") String userpassword);
+    
+//    @Query(value = "select * from users u where u.usermail=: ", nativeQuery = true)
+//    List<Users> findByUserid(@Param("usermail") String usermail);
 
     @Query(value = "select * from users u where u.userenteretatus=1", nativeQuery = true)
     List<Users> findByUserenteretatus();

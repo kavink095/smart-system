@@ -10,6 +10,7 @@ public class UserRBook {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int userbookid;
+	
 	private Date txndate;
 
 	private Date retdate;

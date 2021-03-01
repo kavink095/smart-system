@@ -20,7 +20,7 @@ public class Book {
 
 	@ManyToOne()
 	@JoinColumn(name = "racid", nullable = false)
-	private Rack cell;
+	private Rack rackid;
 
 	@OneToMany(mappedBy = "user")
 	private List<UserRBook> userRBookList;
@@ -28,14 +28,15 @@ public class Book {
 	public Book() {
 	}
 
-	public Book(String bookrefid, String bookname, String bookwriter, String bookdesc, String bookisstatus, Rack cell) {
+	public Book(String bookrefid, String bookname, String bookwriter, String bookdesc, String bookisstatus,
+			Rack rackid) {
 		super();
 		this.bookrefid = bookrefid;
 		this.bookname = bookname;
 		this.bookwriter = bookwriter;
 		this.bookdesc = bookdesc;
 		this.bookisstatus = bookisstatus;
-		this.cell = cell;
+		this.rackid = rackid;
 	}
 
 	public String getBookrefid() {
@@ -78,12 +79,12 @@ public class Book {
 		this.bookisstatus = bookisstatus;
 	}
 
-	public Rack getCell() {
-		return cell;
+	public Rack getRackid() {
+		return rackid;
 	}
 
-	public void setCell(Rack cell) {
-		this.cell = cell;
+	public void setRackid(Rack rackid) {
+		this.rackid = rackid;
 	}
 
 	public List<UserRBook> getUserRBookList() {
@@ -97,8 +98,9 @@ public class Book {
 	@Override
 	public String toString() {
 		return "Book [bookrefid=" + bookrefid + ", bookname=" + bookname + ", bookwriter=" + bookwriter + ", bookdesc="
-				+ bookdesc + ", bookisstatus=" + bookisstatus + ", cell=" + cell + ", userRBookList=" + userRBookList
-				+ "]";
+				+ bookdesc + ", bookisstatus=" + bookisstatus + ", rackid=" + rackid + ", userRBookList="
+				+ userRBookList + "]";
 	}
 
+	
 }

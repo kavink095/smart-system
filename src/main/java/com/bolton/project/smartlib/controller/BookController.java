@@ -1,5 +1,7 @@
 package com.bolton.project.smartlib.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,5 +29,10 @@ public class BookController {
         return true;
     }
 
+    @PostMapping("/chkbook")
+	public List<BookDTO> checkBook(@RequestBody String bookrefid) {
+		System.out.println("User : " + bookrefid);
+		return bookService.checkBook(bookrefid);
+	}
 
 }

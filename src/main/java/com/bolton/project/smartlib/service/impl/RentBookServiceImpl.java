@@ -2,11 +2,15 @@ package com.bolton.project.smartlib.service.impl;
 
 import com.bolton.project.smartlib.common.Common;
 import com.bolton.project.smartlib.dto.UserBookDTO;
+import com.bolton.project.smartlib.entity.Book;
 import com.bolton.project.smartlib.entity.UserRBook;
 import com.bolton.project.smartlib.repository.BookRepository;
 import com.bolton.project.smartlib.repository.UserRBookRepository;
 import com.bolton.project.smartlib.repository.UsersRepository;
 import com.bolton.project.smartlib.service.RentBookService;
+
+import java.util.Date;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +18,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
 
 @Service
 @Transactional(propagation = Propagation.SUPPORTS)
@@ -33,27 +36,31 @@ public class RentBookServiceImpl implements RentBookService {
 	Common common = new Common();
 
 	@Override
-	@Transactional(propagation = Propagation.SUPPORTS)
-	public boolean newRent(UserBookDTO userBookDTO) {
+	@Transactional
+	public boolean newRent(UserBookDTO userBookDTO){
 		int markSet = 1;
-		try {
-
+		boolean value = true;
+		try {		
+			
 			java.util.Date utilDate = new java.util.Date();
 			java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
 
 			UserRBook userRBook = new UserRBook();
+			userRBook.getUserbookid();
 			userRBook.setTxndate(sqlDate);
 			userRBook.setRetdate(sqlDate);
 			userRBook.setMark(markSet);
-			userRBook.setUser(usersRepository.getOne(userBookDTO.getUser()));
-			userRBook.setBook(bookRepository.getOne(userBookDTO.getBook()));
-			userRBookRepository.save(userRBook);
-
-			return true;
+			userRBook.setUser(usersRepository.getOne(userBookDTO.getUserid()));
+			userRBook.setBook(bookRepository.getOne(userBookDTO.getBookrefid()));
+//			userRBookRepository.save(userRBook);
+			if (userRBookRepository.save(userRBook) == null) {
+				value = false;
+			}
+			
 		} catch (Exception e) {
-			logger.debug(e.getMessage(), e);
-			throw e;
+			e.getMessage();
 		}
+		return value;
 	}
 
 	@Override

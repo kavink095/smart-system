@@ -23,5 +23,7 @@ public interface UserService {
 	public UserDTO findUser(String nic);
 
 	public List<UserDTO> login(String usermail, String password);
+	
+	public List<UserDTO> checkUser(String userId);
 
 }

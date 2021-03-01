@@ -10,23 +10,11 @@ public class UserBookDTO {
 	private int mark;
 	private String rackmark;
 
-	private String user;
+	private String userid;
 
-	private String book;
+	private String bookrefid;
 
 	public UserBookDTO() {
-	}
-
-	public UserBookDTO(int userbookid, Date txndate, Date retdate, int mark, String rackmark, String user,
-			String book) {
-		super();
-		this.userbookid = userbookid;
-		this.txndate = txndate;
-		this.retdate = retdate;
-		this.mark = mark;
-		this.rackmark = rackmark;
-		this.user = user;
-		this.book = book;
 	}
 
 	public int getUserbookid() {
@@ -69,27 +57,28 @@ public class UserBookDTO {
 		this.rackmark = rackmark;
 	}
 
-	public String getUser() {
-		return user;
+	public String getUserid() {
+		return userid;
 	}
 
-	public void setUser(String user) {
-		this.user = user;
+	public void setUserid(String userid) {
+		this.userid = userid;
 	}
 
-	public String getBook() {
-		return book;
+	public String getBookrefid() {
+		return bookrefid;
 	}
 
-	public void setBook(String book) {
-		this.book = book;
+	public void setBookrefid(String bookrefid) {
+		this.bookrefid = bookrefid;
 	}
 
 	@Override
 	public String toString() {
 		return "UserBookDTO [userbookid=" + userbookid + ", txndate=" + txndate + ", retdate=" + retdate + ", mark="
-				+ mark + ", rackmark=" + rackmark + ", user=" + user + ", book=" + book + "]";
+				+ mark + ", rackmark=" + rackmark + ", userid=" + userid + ", bookrefid=" + bookrefid + "]";
 	}
 
+	
 	
 }

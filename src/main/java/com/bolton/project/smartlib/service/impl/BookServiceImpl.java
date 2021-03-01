@@ -1,7 +1,9 @@
 package com.bolton.project.smartlib.service.impl;
 
 import com.bolton.project.smartlib.dto.BookDTO;
+import com.bolton.project.smartlib.dto.UserDTO;
 import com.bolton.project.smartlib.entity.Book;
+import com.bolton.project.smartlib.entity.Users;
 import com.bolton.project.smartlib.repository.BookRepository;
 import com.bolton.project.smartlib.repository.RackRepository;
 import com.bolton.project.smartlib.service.BookService;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -38,7 +41,7 @@ public class BookServiceImpl implements BookService {
         book.setBookdesc(bookDTO.getBookdesc());
         book.setBookisstatus(bookDTO.getBookisstatus());
 //        book.setCell(rackRepository.getOne(bookDTO.getRackid()));
-        book.setCell(rackRepository.getOne("R1"));
+        book.setRackid(rackRepository.getOne("R1"));
 
         bookRepository.save(book);
         return true;
@@ -58,4 +61,16 @@ public class BookServiceImpl implements BookService {
     public boolean deleteBook(String id) {
         return false;
     }
+
+	@Override
+	public List<BookDTO> checkBook(String bookrefid) {
+		List<Book> book = bookRepository.findBybookrefid(bookrefid);
+		System.out.println("List :"+book.toString());
+		List<BookDTO> all = new ArrayList<>();
+		for (Book book1 : book) {
+			BookDTO bookDTO = new BookDTO(book1.getBookrefid(),book1.getBookname(),book1.getBookwriter(),book1.getBookdesc(),book1.getBookisstatus(),book1.getRackid().toString());
+			all.add(bookDTO);
+		}
+		return all;
+	}
 }
