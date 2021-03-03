@@ -54,10 +54,6 @@ public class UserServiceImpl implements UserService {
 		return true;
 	}
 
-//    @Override
-//    public List<Users> getAll(Pageable pageable) throws Exception {
-//        return null;
-//    }
 
 	@Override
 	public List<Users> getAll(Pageable pageable) throws Exception {

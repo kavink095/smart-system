@@ -13,6 +13,7 @@ public class BookDTO {
 	private String bookwriter;
 	private String bookdesc;
 	private String bookisstatus;
+	private String booknowsts;
 
 	private String rackid;
 
@@ -22,16 +23,16 @@ public class BookDTO {
 	}
 
 	public BookDTO(String bookrefid, String bookname, String bookwriter, String bookdesc, String bookisstatus,
-			String rackid) {
+			String booknowsts, String rackid) {
 		super();
 		this.bookrefid = bookrefid;
 		this.bookname = bookname;
 		this.bookwriter = bookwriter;
 		this.bookdesc = bookdesc;
 		this.bookisstatus = bookisstatus;
+		this.booknowsts = booknowsts;
 		this.rackid = rackid;
 	}
-
 
 	public String getBookrefid() {
 		return bookrefid;
@@ -73,6 +74,14 @@ public class BookDTO {
 		this.bookisstatus = bookisstatus;
 	}
 
+	public String getBooknowsts() {
+		return booknowsts;
+	}
+
+	public void setBooknowsts(String booknowsts) {
+		this.booknowsts = booknowsts;
+	}
+
 	public String getRackid() {
 		return rackid;
 	}
@@ -92,10 +101,8 @@ public class BookDTO {
 	@Override
 	public String toString() {
 		return "BookDTO [bookrefid=" + bookrefid + ", bookname=" + bookname + ", bookwriter=" + bookwriter
-				+ ", bookdesc=" + bookdesc + ", bookisstatus=" + bookisstatus + ", rackid=" + rackid
-				+ ", userBookDTOList=" + userBookDTOList + "]";
+				+ ", bookdesc=" + bookdesc + ", bookisstatus=" + bookisstatus + ", booknowsts=" + booknowsts
+				+ ", rackid=" + rackid + ", userBookDTOList=" + userBookDTOList + "]";
 	}
-
-
 
 }

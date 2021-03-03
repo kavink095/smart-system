@@ -68,9 +68,14 @@ public class BookServiceImpl implements BookService {
 		System.out.println("List :"+book.toString());
 		List<BookDTO> all = new ArrayList<>();
 		for (Book book1 : book) {
-			BookDTO bookDTO = new BookDTO(book1.getBookrefid(),book1.getBookname(),book1.getBookwriter(),book1.getBookdesc(),book1.getBookisstatus(),book1.getRackid().toString());
+			BookDTO bookDTO = new BookDTO(book1.getBookrefid(),book1.getBookname(),book1.getBookwriter(),book1.getBookdesc(),book1.getBookisstatus(),book1.getBooknowsts(),book1.getRackid().toString());
 			all.add(bookDTO);
 		}
 		return all;
+	}
+
+	@Override
+	public void rackPosition(String bookrefid,String rackId) {
+		bookRepository.updateBooknowsts(bookrefid, rackId);		
 	}
 }

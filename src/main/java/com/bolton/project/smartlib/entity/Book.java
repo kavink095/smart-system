@@ -17,6 +17,8 @@ public class Book {
 	private String bookdesc;
 	@Column(name = "bookisstatus")
 	private String bookisstatus;
+	@Column(name = "booknowsts")
+	private String booknowsts;
 
 	@ManyToOne()
 	@JoinColumn(name = "racid", nullable = false)
@@ -29,13 +31,14 @@ public class Book {
 	}
 
 	public Book(String bookrefid, String bookname, String bookwriter, String bookdesc, String bookisstatus,
-			Rack rackid) {
+			String booknowsts, Rack rackid) {
 		super();
 		this.bookrefid = bookrefid;
 		this.bookname = bookname;
 		this.bookwriter = bookwriter;
 		this.bookdesc = bookdesc;
 		this.bookisstatus = bookisstatus;
+		this.booknowsts = booknowsts;
 		this.rackid = rackid;
 	}
 
@@ -79,6 +82,14 @@ public class Book {
 		this.bookisstatus = bookisstatus;
 	}
 
+	public String getBooknowsts() {
+		return booknowsts;
+	}
+
+	public void setBooknowsts(String booknowsts) {
+		this.booknowsts = booknowsts;
+	}
+
 	public Rack getRackid() {
 		return rackid;
 	}
@@ -98,9 +109,11 @@ public class Book {
 	@Override
 	public String toString() {
 		return "Book [bookrefid=" + bookrefid + ", bookname=" + bookname + ", bookwriter=" + bookwriter + ", bookdesc="
-				+ bookdesc + ", bookisstatus=" + bookisstatus + ", rackid=" + rackid + ", userRBookList="
-				+ userRBookList + "]";
+				+ bookdesc + ", bookisstatus=" + bookisstatus + ", booknowsts=" + booknowsts + ", rackid=" + rackid
+				+ ", userRBookList=" + userRBookList + "]";
 	}
+
+	
 
 	
 }
