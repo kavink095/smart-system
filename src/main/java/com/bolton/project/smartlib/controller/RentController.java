@@ -38,8 +38,4 @@ public class RentController {
         return val;
     }
 
-    @GetMapping("/rentCheck")
-    public int checkOldRentStatus(@RequestBody Users user) throws Exception {
-        return rentBookService.rentBook(user.getUserid());
-    }
 }
