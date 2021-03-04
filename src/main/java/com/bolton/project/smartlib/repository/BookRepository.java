@@ -17,7 +17,7 @@ public interface BookRepository extends JpaRepository<Book, String> {
 	List<Book> findBybookrefid(String bookrefid);
 
 	@Modifying()
-	@Query(value = "update book b set b.booknowsts=:rackid where u.bookrefid =:userid", nativeQuery = true)
+	@Query(value = "update book b set b.booknowsts=:rackid where b.bookrefid =:bookrefid", nativeQuery = true)
 //	    String userenteretatusUpdate(@Param("userid") Integer val);
-	void updateBooknowsts(@Param("rackid") String rackid, @Param("userid") String userid);
+	Integer updateBooknowsts(@Param("rackid") String rackid, @Param("bookrefid") String bookrefid);
 }

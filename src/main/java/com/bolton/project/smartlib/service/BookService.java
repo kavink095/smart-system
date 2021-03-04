@@ -14,5 +14,5 @@ public interface BookService {
 
     public boolean deleteBook(String id);
 	public List<BookDTO> checkBook(String bookrefid);
-	public void rackPosition(String bookrefid,String rackId);
+	public int rackPosition(String rackId,String bookrefid);
 }

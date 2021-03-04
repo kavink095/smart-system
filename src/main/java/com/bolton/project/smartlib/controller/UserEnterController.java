@@ -16,8 +16,20 @@ public class UserEnterController {
 
 	@PutMapping("/open/{refid}")
 	public int enterCheck(@PathVariable String refid) throws SQLException {
-		System.out.println("Controller :" + refid);
-		return userEnterService.openDoor(refid);
+		int ret = 0;
+		if (userEnterService.openDoor(refid) != 0){
+			ret = 1;
+		}
+		return ret;
+	}
+
+	@PutMapping("/exit/{refid}")
+	public int exitCheck(@PathVariable String refid) throws SQLException {
+		int ret = 0;
+		if (userEnterService.exit(refid) != 0){
+			ret = 1;
+		}
+		return ret;
 	}
 
 	@PutMapping("/bookmark")

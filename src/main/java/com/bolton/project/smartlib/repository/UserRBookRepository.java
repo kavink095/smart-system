@@ -26,5 +26,10 @@ public interface UserRBookRepository extends JpaRepository<UserRBook, Integer> {
     @Query(value = "update userbook b set b.bookcategory where b.bookrefid=:bookId", nativeQuery = true)
     int updateRackMark(@Param("bookId") String bookId);
 
+    @Modifying
+    @Query(value = "update userbook b set b.mark='1' where b.bookrefid=:bookrefid", nativeQuery = true)
+    int updateMark(@Param("bookrefid") String bookrefid);
+
+    List<UserRBook> findAllByUser_UseridAndMark(@Param("userid") String userid,@Param("mark") int mark);
 
 }

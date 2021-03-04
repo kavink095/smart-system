@@ -9,7 +9,10 @@ import com.bolton.project.smartlib.repository.UserRBookRepository;
 import com.bolton.project.smartlib.repository.UsersRepository;
 import com.bolton.project.smartlib.service.RentBookService;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,91 +25,81 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional(propagation = Propagation.SUPPORTS)
 public class RentBookServiceImpl implements RentBookService {
-	Logger logger = LoggerFactory.getLogger(RentBookServiceImpl.class);
+    Logger logger = LoggerFactory.getLogger(RentBookServiceImpl.class);
 
-	@Autowired
-	private UserRBookRepository userRBookRepository;
+    @Autowired
+    private UserRBookRepository userRBookRepository;
 
-	@Autowired
-	private BookRepository bookRepository;
+    @Autowired
+    private BookRepository bookRepository;
 
-	@Autowired
-	private UsersRepository usersRepository;
+    @Autowired
+    private UsersRepository usersRepository;
 
-	Common common = new Common();
+    @Override
+    @Transactional
+    public int newRent(UserBookDTO userBookDTO) {
+        int markSet = 1;
+        int value = 0;
 
-	@Override
-	@Transactional
-	public boolean newRent(UserBookDTO userBookDTO){
-		int markSet = 1;
-		boolean value = true;
-		try {		
-			
-			java.util.Date utilDate = new java.util.Date();
-			java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+        /*
+         * return values what for.... ?
+         * value 0 == error not save
+         * value 1 == save new
+         * value 2 == not return old book. date expired
+         * value 3 == user one month get 3 time borrowing books
+         */
 
-			UserRBook userRBook = new UserRBook();
-			userRBook.getUserbookid();
-			userRBook.setTxndate(sqlDate);
-			userRBook.setRetdate(sqlDate);
-			userRBook.setMark(markSet);
-			userRBook.setUser(usersRepository.getOne(userBookDTO.getUserid()));
-			userRBook.setBook(bookRepository.getOne(userBookDTO.getBookrefid()));
-//			userRBookRepository.save(userRBook);
-			if (userRBookRepository.save(userRBook) == null) {
-				value = false;
-			}
-			
-		} catch (Exception e) {
-			e.getMessage();
-		}
-		return value;
-	}
+        try {
 
-	@Override
-	@Transactional(propagation = Propagation.SUPPORTS)
-	public int rentBook(String userid) throws Exception {
-		int returnSts = 1;
-		int dateSts = 0;
+            java.util.Date utilDate = new java.util.Date();
+            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
 
-		try {
+            String userfnd = userBookDTO.getUserid();
+            List<UserRBook> user = userRBookRepository.findAllByUser_UseridAndMark(userfnd, 1);
 
-			String markGetById = userRBookRepository.findUserRBooksByUser(userid);
+            if (user != null) {
 
-			UserRBook userRBook1 = userRBookRepository.findUserRBooksByUserAndRetdate(userid);
+                if (user.size() >= 3) {
+                    value = 3;
+                } else {
+                    List<UserBookDTO> userDTOS = new ArrayList<>();
+                    for (UserRBook users : user) {
+                        UserBookDTO userDTO = new UserBookDTO(users.getUserbookid(), users.getTxndate(), users.getRetdate(), users.getMark(), users.getRackmark(), users.getBook().getBookrefid(),
+                                users.getBook().getBookrefid());
+                        userDTOS.add(userDTO);
 
-			Date dtf = new Date();
-			dtf.getDate();
+                        long dt = Common.betweenDates(users.getTxndate(), utilDate);
 
-			/*
-			 * call common class month between method for calculation return date A month
-			 * between is equal or grater than 1,dateStatus is 1.
-			 */
-			if (common.betweenDates(userRBook1.getTxndate(), userRBook1.getRetdate()) >= 30) {
-				dateSts = 1;
-			}
-			String eMark = markGetById;
+                        if (dt >= 30) {
+                            value = 2;
+                        } else {
+                            value = 1;
+                        }
+                    }
+                }
 
-			if (dateSts == 1) {
-				throw new Exception("Please return old books now!");
-			}
+                if (value == 1) {
+                    UserRBook userRBook = new UserRBook();
+                    userRBook.getUserbookid();
+                    userRBook.setTxndate(sqlDate);
+                    userRBook.setRetdate(sqlDate);
+                    userRBook.setMark(markSet);
+                    userRBook.setUser(usersRepository.getOne(userBookDTO.getUserid()));
+                    userRBook.setBook(bookRepository.getOne(userBookDTO.getBookrefid()));
+                    if (userRBookRepository.save(userRBook) == null) {
+                        value = 0;
+                    } else {
+                        value = 1;
+                    }
+                }
 
-			UserRBook userB = userRBookRepository.findUserRBookByUserAndUserbookid(userid);
-
-			if (userB == null) {
-				throw new Exception("invalid user !");
-			}
-			if (userB.getMark() == 1) {
-				returnSts = 1;
-			} else {
-				returnSts = 0;
-			}
-
-			return returnSts;
-
-		} catch (Exception e) {
-			logger.debug(e.getMessage());
-			throw e;
-		}
-	}
+            }
+            return value;
+        } catch (
+                Exception e) {
+            e.printStackTrace();
+            return value;
+        }
+    }
 }

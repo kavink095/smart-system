@@ -8,34 +8,38 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+
 @CrossOrigin("*")
 @RestController
 @RequestMapping(value = "api/v1/rents")
 public class RentController {
 
-	@Autowired
-	private RentBookServiceImpl rentBookService;
+    @Autowired
+    private RentBookServiceImpl rentBookService;
 
-//	@PostMapping("/new")
-//	public ResponseEntity<?> borrowBook(@RequestBody UserBookDTO userRBookDTO) {
-//		try {
-//			System.out.println("Rent : "+userRBookDTO.toString());
-//			return new ResponseEntity<Object>(rentBookService.newRent(userRBookDTO), HttpStatus.OK);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			return new ResponseEntity<Object>(rentBookService.newRent(userRBookDTO), HttpStatus.INTERNAL_SERVER_ERROR);
-//		}
-//	}
+    @PostMapping("/new")
+    public int rentBook(@RequestBody UserBookDTO userRBookDTO) {
+        int val = rentBookService.newRent(userRBookDTO);
+        switch (val) {
+            case 0:
+                val = 0;
+                break;
+            case 1:
+                val = 1;
+                break;
+            case 2:
+                val = 2;
+                break;
+            case 3:
+                val = 3;
+                break;
+        }
+        return val;
+    }
 
-	@PostMapping("/new")
-	public boolean rentBook(@RequestBody UserBookDTO userRBookDTO) {
-		System.out.println("Rent : " + userRBookDTO.toString());
-		return rentBookService.newRent(userRBookDTO);
-//		 true;
-	}
-
-	@GetMapping("/rentCheck")
-	public int checkOldRentStatus(@RequestBody Users user) throws Exception {
-		return rentBookService.rentBook(user.getUserid());
-	}
+    @GetMapping("/rentCheck")
+    public int checkOldRentStatus(@RequestBody Users user) throws Exception {
+        return rentBookService.rentBook(user.getUserid());
+    }
 }

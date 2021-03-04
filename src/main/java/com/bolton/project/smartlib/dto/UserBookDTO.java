@@ -17,6 +17,16 @@ public class UserBookDTO {
 	public UserBookDTO() {
 	}
 
+	public UserBookDTO(int userbookid, Date txndate, Date retdate, int mark, String rackmark, String userid, String bookrefid) {
+		this.userbookid = userbookid;
+		this.txndate = txndate;
+		this.retdate = retdate;
+		this.mark = mark;
+		this.rackmark = rackmark;
+		this.userid = userid;
+		this.bookrefid = bookrefid;
+	}
+
 	public int getUserbookid() {
 		return userbookid;
 	}

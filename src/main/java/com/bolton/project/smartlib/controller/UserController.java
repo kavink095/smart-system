@@ -20,8 +20,11 @@ public class UserController {
 
 	@PostMapping("/create")
 	public boolean saveUser(@RequestBody UserDTO userDTO) {
-		userService.CreateUser(userDTO);
-		return true;
+		boolean ret = false;
+		if (userService.CreateUser(userDTO)){
+			ret = true;
+		}
+		return ret;
 	}
 
 	@GetMapping("/getAll")
@@ -41,7 +44,6 @@ public class UserController {
 
 	@PostMapping("/chkuser")
 	public List<UserDTO> checkUser(@RequestBody String userid) {
-		System.out.println("User : " + userid);
 		return userService.checkUser(userid);
 	}
 
