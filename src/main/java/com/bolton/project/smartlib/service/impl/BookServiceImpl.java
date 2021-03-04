@@ -66,9 +66,9 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
+	@Transactional
 	public List<BookDTO> checkBook(String bookrefid) {
 		List<Book> book = bookRepository.findBybookrefid(bookrefid);
-		System.out.println("List :" + book.toString());
 		List<BookDTO> all = new ArrayList<>();
 		for (Book book1 : book) {
 			BookDTO bookDTO = new BookDTO(book1.getBookrefid(), book1.getBookname(), book1.getBookwriter(),
@@ -83,7 +83,7 @@ public class BookServiceImpl implements BookService {
 	public int rackPosition(String rackId,String bookrefid) {
 		boolean val = false;
 		int ret = 0;
-		if (val = bookRepository.updateBooknowsts(rackId,bookrefid) == 1) {
+		if (bookRepository.updateBooknowsts(rackId,bookrefid) == 1) {
 			ret = 1;
 		} else {
 			ret = 0;

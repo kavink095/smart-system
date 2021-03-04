@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface BookRepository extends JpaRepository<Book, String> {
 
-	List<Book> findBybookrefid(String bookrefid);
+	List<Book> findBybookrefid(@Param("bookrefid") String bookrefid);
 
 	@Modifying()
 	@Query(value = "update book b set b.booknowsts=:rackid where b.bookrefid =:bookrefid", nativeQuery = true)

@@ -26,7 +26,7 @@ public class BookController {
 
 	@PostMapping("/chkbook")
 	public List<BookDTO> checkBook(@RequestBody String bookrefid) {
-		System.out.println("User : " + bookrefid);
+		System.out.println("Book : " + bookrefid);
 		return bookService.checkBook(bookrefid);
 	}
 
