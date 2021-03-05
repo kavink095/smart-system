@@ -1,5 +1,7 @@
 package com.bolton.project.smartlib.dto;
 
+import com.bolton.project.smartlib.entity.Rack;
+
 import java.util.Date;
 
 public class UserBookDTO {
@@ -13,6 +15,7 @@ public class UserBookDTO {
 	private String userid;
 
 	private String bookrefid;
+
 
 	public UserBookDTO() {
 	}

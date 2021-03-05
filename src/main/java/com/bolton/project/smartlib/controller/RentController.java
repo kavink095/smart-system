@@ -1,5 +1,6 @@
 package com.bolton.project.smartlib.controller;
 
+import com.bolton.project.smartlib.dto.BookDTO;
 import com.bolton.project.smartlib.dto.UserBookDTO;
 import com.bolton.project.smartlib.entity.Users;
 import com.bolton.project.smartlib.service.impl.RentBookServiceImpl;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 @CrossOrigin("*")
 @RestController
@@ -36,6 +38,11 @@ public class RentController {
                 break;
         }
         return val;
+    }
+
+    @GetMapping("/getWrong")
+    public ArrayList<UserBookDTO> getAllWrong() {
+        return rentBookService.getAllWrong();
     }
 
 }

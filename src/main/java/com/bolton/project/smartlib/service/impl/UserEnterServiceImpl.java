@@ -2,8 +2,11 @@ package com.bolton.project.smartlib.service.impl;
 
 import com.bolton.project.smartlib.common.Common;
 import com.bolton.project.smartlib.dto.UserDTO;
+import com.bolton.project.smartlib.dto.UserlogDTO;
+import com.bolton.project.smartlib.entity.Userlog;
 import com.bolton.project.smartlib.entity.Users;
 import com.bolton.project.smartlib.repository.UserRBookRepository;
+import com.bolton.project.smartlib.repository.UserlogRepository;
 import com.bolton.project.smartlib.repository.UsersRepository;
 import com.bolton.project.smartlib.service.UserEnterService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +15,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.*;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +29,9 @@ public class UserEnterServiceImpl implements UserEnterService {
     @Autowired
     private UserRBookRepository userRBookRepository;
 
+    @Autowired
+    private UserlogRepository userlogRepository;
+
     // Common classs object
     Common common = new Common();
 
@@ -33,6 +40,15 @@ public class UserEnterServiceImpl implements UserEnterService {
     public int openDoor(String userid) throws SQLException {
         int userActive = 0;
         int retStatus = 0;
+
+        java.util.Date utilDate = new java.util.Date();
+        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+
+        //Get SQL time instance
+        java.sql.Time sqlTime = new Time(sqlDate.getTime());
+
+        //Get LocalTime from SQL time
+        LocalTime localTime = sqlTime.toLocalTime();
 
         try {
             List<Users> user = usersRepository.findByUserid(userid);
@@ -50,7 +66,25 @@ public class UserEnterServiceImpl implements UserEnterService {
                 throw new Exception("invalid user !");
             } else {
                 if (usersRepository.updateuserenteretatus(userid) == 1) {
-                    retStatus = 1;
+
+                    //add user enter data to user log table
+                    Userlog userlog = new Userlog();
+                    UserlogDTO userlogDTO = new UserlogDTO();
+
+                    userlog.setLogid(userlogDTO.getLogid());
+                    userlog.setUserid(userid);
+                    userlog.setMark(1);
+                    userlog.setEnterdate(sqlDate);
+                    userlog.setEntertime(sqlTime);
+                    userlog.setExittime(null);
+
+                    Object obj = userlogRepository.save(userlog);
+
+                    if (obj != null){
+                        retStatus = 1;
+                    }else {
+                        retStatus = 0;
+                    }
                 }
             }
 

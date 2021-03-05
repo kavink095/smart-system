@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface UserService {
-	public boolean CreateUser(UserDTO userDTO);
+	public int CreateUser(UserDTO userDTO);
 
 	public ArrayList<UserDTO> getAllUsers();
 

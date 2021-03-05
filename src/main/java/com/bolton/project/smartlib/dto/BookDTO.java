@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.Column;
 
 import com.bolton.project.smartlib.entity.Rack;
+import com.bolton.project.smartlib.entity.UserRBook;
 
 public class BookDTO {
 

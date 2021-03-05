@@ -1,5 +1,6 @@
 package com.bolton.project.smartlib.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +20,20 @@ public class BookController {
 	private BookService bookService;
 
 	@PostMapping("/create")
-	public boolean saveUser(@RequestBody BookDTO bookDTO) {
-		bookService.CreateBook(bookDTO);
-		return true;
+	public int saveUser(@RequestBody BookDTO bookDTO) {
+        int valBook = bookService.CreateBook(bookDTO);
+
+        switch (valBook) {
+            case 0:
+                valBook = 0;
+                break;
+            case 1:
+                valBook = 1;
+                break;
+            case 2:
+                valBook = 2;
+        }
+        return valBook;
 	}
 
 	@PostMapping("/chkbook")
@@ -40,5 +52,17 @@ public class BookController {
 		}
 		return ret;
 	}
+
+
+	@GetMapping("/getAll")
+	public ArrayList<BookDTO> getAllUsers() {
+		return bookService.getAllBooks();
+	}
+
+	@GetMapping("/getWrong")
+	public ArrayList<BookDTO> getAllWrong() {
+		return bookService.getAllWrong();
+	}
+
 
 }

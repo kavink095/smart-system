@@ -32,4 +32,10 @@ public interface UserRBookRepository extends JpaRepository<UserRBook, Integer> {
 
     List<UserRBook> findAllByUser_UseridAndMark(@Param("userid") String userid,@Param("mark") int mark);
 
+    @Query(value = "select u.userbookid,u.mark,u.rackmark,u.retdate,u.txndate,u.bookrefid,u.userid,b.racid,b.booknowsts ,case when b.booknowsts IS NOT NUll and b.racid=b.booknowsts then b.racid\n" +
+            "end\n" +
+            "from userbook u INNER JOIN book b ON u.bookrefid=b.bookrefid group by b.bookrefid",
+            nativeQuery = true)
+    List<UserRBook> getAllByBookrefidAndUser();
+
 }

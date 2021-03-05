@@ -102,4 +102,17 @@ public class RentBookServiceImpl implements RentBookService {
             return value;
         }
     }
+
+    @Override
+    public ArrayList<UserBookDTO> getAllWrong() {
+        List<UserRBook> bookList = userRBookRepository.getAllByBookrefidAndUser();
+        ArrayList<UserBookDTO> bookDTOs = new ArrayList<>();
+        for (UserRBook users : bookList) {
+            UserBookDTO userDTO = new UserBookDTO(users.getUserbookid(), users.getTxndate(), users.getRetdate(), users.getMark(), users.getRackmark(), users.getUser().getUserid(),
+                    users.getBook().getBookrefid());
+            bookDTOs.add(userDTO);
+
+        }
+        return bookDTOs;
+    }
 }

@@ -109,7 +109,7 @@ public class Book {
 	@Override
 	public String toString() {
 		return "Book [bookrefid=" + bookrefid + ", bookname=" + bookname + ", bookwriter=" + bookwriter + ", bookdesc="
-				+ bookdesc + ", bookisstatus=" + bookisstatus + ", booknowsts=" + booknowsts + ", rackid=" + rackid
+				+ bookdesc + ", bookisstatus=" + bookisstatus + ", booknowsts=" + booknowsts
 				+ ", userRBookList=" + userRBookList + "]";
 	}
 

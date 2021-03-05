@@ -2,7 +2,9 @@ package com.bolton.project.smartlib.service.impl;
 
 import com.bolton.project.smartlib.dto.BookDTO;
 import com.bolton.project.smartlib.dto.UserDTO;
+import com.bolton.project.smartlib.dto.UserlogDTO;
 import com.bolton.project.smartlib.entity.Book;
+import com.bolton.project.smartlib.entity.Userlog;
 import com.bolton.project.smartlib.entity.Users;
 import com.bolton.project.smartlib.repository.BookRepository;
 import com.bolton.project.smartlib.repository.RackRepository;
@@ -18,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -35,19 +38,40 @@ public class BookServiceImpl implements BookService {
 
 	@Override
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public boolean CreateBook(BookDTO bookDTO) {
+	public int CreateBook(BookDTO bookDTO) {
 
-		Book book = new Book();
-		book.setBookrefid(bookDTO.getBookrefid());
-		book.setBookname(bookDTO.getBookname());
-		book.setBookwriter(bookDTO.getBookwriter());
-		book.setBookdesc(bookDTO.getBookdesc());
-		book.setBookisstatus(bookDTO.getBookisstatus());
-//        book.setCell(rackRepository.getOne(bookDTO.getRackid()));
-		book.setRackid(rackRepository.getOne("R1"));
+		int ret = 0;
+		try {
 
-		bookRepository.save(book);
-		return true;
+			List<Book> bookList = bookRepository.findBybookrefid(bookDTO.getBookrefid());
+
+			if (!bookList.isEmpty()) {
+				//cannot create user is here..
+				ret = 2;
+			} else {
+				Book book = new Book();
+				book.setBookrefid(bookDTO.getBookrefid());
+				book.setBookname(bookDTO.getBookname());
+				book.setBookwriter(bookDTO.getBookwriter());
+				book.setBookdesc(bookDTO.getBookdesc());
+				book.setBookisstatus(bookDTO.getBookisstatus());
+                book.setRackid(rackRepository.getOne(bookDTO.getRackid()));
+
+				Object obj =bookRepository.save(book);
+				if (obj == null) {
+					//failed creation
+					ret = 0;
+				} else {
+					//success
+					ret = 1;
+				}
+			}
+
+			return ret;
+		} catch (Exception e) {
+			logger.debug(e.getMessage(), e);
+			return ret;
+		}
 	}
 
 	@Override
@@ -97,6 +121,31 @@ public class BookServiceImpl implements BookService {
 			}
 		}
 		return ret;
+
+	}
+
+	@Override
+	public ArrayList<BookDTO> getAllBooks() {
+		List<Book> bookList = bookRepository.findAll();
+		ArrayList<BookDTO> bookDTOs = new ArrayList<>();
+		bookList.forEach(book -> bookDTOs.add(new BookDTO(book.getBookrefid(),book.getBookname(),book.getBookwriter(),book.getBookdesc(),
+				book.getBookisstatus(),book.getBooknowsts(),book.getRackid().getRacid())));
+		return bookDTOs;
+	}
+
+	@Override
+	@Transactional
+	public ArrayList<BookDTO> getAllWrong() {
+		List<Book> bookList = bookRepository.getAllByBookrefidAndUser();
+		ArrayList<BookDTO> bookDTOs = new ArrayList<>();
+		for (Book books : bookList) {
+			BookDTO bookDTO = new BookDTO(books.getBookrefid(), books.getBookname(), books.getBookwriter(), books.getBookdesc(), books.getBookisstatus(),
+					books.getBooknowsts(), books.getRackid().getRacid());
+
+			bookDTOs.add(bookDTO);
+
+		}
+		return bookDTOs;
 
 	}
 }

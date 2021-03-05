@@ -29,27 +29,42 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     @ExceptionHandler(value = {Exception.class})
-    public boolean CreateUser(UserDTO userDTO) {
-
+    public int CreateUser(UserDTO userDTO) {
+        int ret = 0;
         try {
-            Users user = new Users();
 
-            user.setUserid(userDTO.getUserid());
-            user.setUserfname(userDTO.getUserfname());
-            user.setUserlname(userDTO.getUserlname());
-            user.setUseraddress(userDTO.getUseraddress());
-            user.setUsermobile(userDTO.getUsermobile());
-            user.setUserenteretatus("0");
-            user.setUseractivestatus(userDTO.getUseractivestatus());
-            user.setUsermail(userDTO.getUsermail());
-            user.setUserpassword(userDTO.getUserpassword());
+            List<Users> uselist = usersRepository.findByUserid(userDTO.getUserid());
 
-            usersRepository.save(user);
+            if (!uselist.isEmpty()) {
+                //cannot create user is here..
+                ret = 2;
+            } else {
+                Users user = new Users();
 
-            return true;
+                user.setUserid(userDTO.getUserid());
+                user.setUserfname(userDTO.getUserfname());
+                user.setUserlname(userDTO.getUserlname());
+                user.setUseraddress(userDTO.getUseraddress());
+                user.setUsermobile(userDTO.getUsermobile());
+                user.setUserenteretatus("0");
+                user.setUseractivestatus(userDTO.getUseractivestatus());
+                user.setUsermail(userDTO.getUsermail());
+                user.setUserpassword(userDTO.getUserpassword());
+
+                Object obj = usersRepository.save(user);
+                if (obj == null) {
+                    //failed creation
+                    ret = 0;
+                } else {
+                    //success
+                    ret = 1;
+                }
+            }
+
+            return ret;
         } catch (Exception e) {
             logger.debug(e.getMessage(), e);
-            return false;
+            return ret;
         }
     }
 
