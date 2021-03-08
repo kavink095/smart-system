@@ -32,6 +32,15 @@ public class UserEnterController {
 		return ret;
 	}
 
+	@PutMapping("/exitBook/{bookrefid}")
+	public int exitCheckBook(@PathVariable String bookrefid) throws SQLException {
+		int ret = 0;
+		if (userEnterService.exitBook(bookrefid) != 0){
+			ret = 1;
+		}
+		return ret;
+	}
+
 	@PutMapping("/bookmark")
 	public boolean enterBookUpdate(String bookid) throws SQLException {
 		return userEnterService.retBook(bookid);

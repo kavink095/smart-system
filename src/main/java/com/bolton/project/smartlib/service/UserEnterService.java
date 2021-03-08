@@ -8,5 +8,7 @@ public interface UserEnterService {
 
     public int exit(String userid) throws SQLException;
 
+    public int exitBook(String bookrefid) throws SQLException;
+
     public boolean retBook(String bookId) throws SQLException;
 }

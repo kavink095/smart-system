@@ -3,8 +3,10 @@ package com.bolton.project.smartlib.service.impl;
 import com.bolton.project.smartlib.common.Common;
 import com.bolton.project.smartlib.dto.UserDTO;
 import com.bolton.project.smartlib.dto.UserlogDTO;
+import com.bolton.project.smartlib.entity.Book;
 import com.bolton.project.smartlib.entity.Userlog;
 import com.bolton.project.smartlib.entity.Users;
+import com.bolton.project.smartlib.repository.BookRepository;
 import com.bolton.project.smartlib.repository.UserRBookRepository;
 import com.bolton.project.smartlib.repository.UserlogRepository;
 import com.bolton.project.smartlib.repository.UsersRepository;
@@ -25,6 +27,9 @@ public class UserEnterServiceImpl implements UserEnterService {
 
     @Autowired
     private UsersRepository usersRepository;
+
+    @Autowired
+    private BookRepository bookRepository;
 
     @Autowired
     private UserRBookRepository userRBookRepository;
@@ -102,6 +107,21 @@ public class UserEnterServiceImpl implements UserEnterService {
         try {
             if (usersRepository.updateByuserenteretatus(userid) == 1) {
                 userlogRepository.updateExittime(sqlTime,userid);
+                ret = 1;
+            }
+            return ret;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ret;
+        }
+    }
+
+    @Override
+    public int exitBook(String bookrefid) throws SQLException {
+        int ret = 0;
+        try {
+            List<Book> bookList = bookRepository.getBookBybookisstatus(bookrefid);
+            if (bookList.isEmpty()) {
                 ret = 1;
             }
             return ret;

@@ -36,6 +36,12 @@ public class RentController {
             case 3:
                 val = 3;
                 break;
+            case 4:
+                val = 4;
+                break;
+            case 5:
+                val = 5;
+                break;
         }
         return val;
     }

@@ -24,4 +24,11 @@ public interface BookRepository extends JpaRepository<Book, String> {
 			"b.bookdesc,b.bookisstatus,b.bookwriter,b.bookname , case when racid=booknowsts then racid end from book b where b.booknowsts IS NOT NUll group by b.booknowsts",
 			nativeQuery = true)
 	List<Book> getAllByBookrefidAndUser();
+
+	@Modifying()
+	@Query(value = "update book b set b.bookisstatus='0' where b.bookrefid =:bookrefid", nativeQuery = true)
+	Integer updatebookisstatus(@Param("bookrefid") String bookrefid);
+
+	@Query(value = "select * from book where bookisstatus='1' and bookrefid=:bookrefid",nativeQuery = true)
+	List<Book> getBookBybookisstatus(@Param("bookrefid")String bookrefid);
 }

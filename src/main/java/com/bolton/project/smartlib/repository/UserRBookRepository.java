@@ -38,4 +38,7 @@ public interface UserRBookRepository extends JpaRepository<UserRBook, Integer> {
             nativeQuery = true)
     List<UserRBook> getAllByBookrefidAndUser();
 
+    @Query(value = "select * from userbook where bookrefid=:bookrefid and userid=:userid",nativeQuery = true)
+    List<UserRBook> getAllByBookrefidAndUser_Userid(@Param("bookrefid") String bookrefid,@Param("userid") String userid);
+
 }

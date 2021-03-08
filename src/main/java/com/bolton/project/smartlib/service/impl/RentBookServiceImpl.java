@@ -48,6 +48,8 @@ public class RentBookServiceImpl implements RentBookService {
          * value 1 == save new
          * value 2 == not return old book. date expired
          * value 3 == user one month get 3 time borrowing books
+         * value 4 == cannot borrow book
+         * value 5 == this book you borrowed
          */
 
         try {
@@ -64,6 +66,10 @@ public class RentBookServiceImpl implements RentBookService {
                     value = 3;
                 } else {
                     List<UserBookDTO> userDTOS = new ArrayList<>();
+                    if(userDTOS.isEmpty()){
+                        value = 1;
+                    }
+
                     for (UserRBook users : user) {
                         UserBookDTO userDTO = new UserBookDTO(users.getUserbookid(), users.getTxndate(), users.getRetdate(), users.getMark(), users.getRackmark(), users.getBook().getBookrefid(),
                                 users.getBook().getBookrefid());
@@ -79,6 +85,12 @@ public class RentBookServiceImpl implements RentBookService {
                     }
                 }
 
+                List<UserRBook> ubookList = userRBookRepository.getAllByBookrefidAndUser_Userid(userBookDTO.getBookrefid(),userBookDTO.getUserid());
+
+                if(!ubookList.isEmpty()){
+                    value = 5;
+                }
+
                 if (value == 1) {
                     UserRBook userRBook = new UserRBook();
                     userRBook.getUserbookid();
@@ -90,7 +102,11 @@ public class RentBookServiceImpl implements RentBookService {
                     if (userRBookRepository.save(userRBook) == null) {
                         value = 0;
                     } else {
-                        value = 1;
+                        if (bookRepository.updatebookisstatus(userBookDTO.getBookrefid())==1){
+                            value = 1;
+                        }else{
+                            value = 4;
+                        }
                     }
                 }
 
