@@ -53,7 +53,6 @@ public class BookController {
 		return ret;
 	}
 
-
 	@GetMapping("/getAll")
 	public ArrayList<BookDTO> getAllUsers() {
 		return bookService.getAllBooks();
@@ -63,6 +62,4 @@ public class BookController {
 	public ArrayList<BookDTO> getAllWrong() {
 		return bookService.getAllWrong();
 	}
-
-
 }

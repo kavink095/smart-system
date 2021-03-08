@@ -35,20 +35,20 @@ public class UserEnterServiceImpl implements UserEnterService {
     // Common classs object
     Common common = new Common();
 
+    java.util.Date utilDate = new java.util.Date();
+    java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+
+    //Get SQL time instance
+    java.sql.Time sqlTime = new Time(sqlDate.getTime());
+
+    //Get LocalTime from SQL time
+    LocalTime localTime = sqlTime.toLocalTime();
+
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public int openDoor(String userid) throws SQLException {
         int userActive = 0;
         int retStatus = 0;
-
-        java.util.Date utilDate = new java.util.Date();
-        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-
-        //Get SQL time instance
-        java.sql.Time sqlTime = new Time(sqlDate.getTime());
-
-        //Get LocalTime from SQL time
-        LocalTime localTime = sqlTime.toLocalTime();
 
         try {
             List<Users> user = usersRepository.findByUserid(userid);
@@ -101,6 +101,7 @@ public class UserEnterServiceImpl implements UserEnterService {
         int ret = 0;
         try {
             if (usersRepository.updateByuserenteretatus(userid) == 1) {
+                userlogRepository.updateExittime(sqlTime,userid);
                 ret = 1;
             }
             return ret;
